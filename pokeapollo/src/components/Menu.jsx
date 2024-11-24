@@ -1,17 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Menu = () => {
     const [activeTab, setActiveTab] = useState('Home');
     const [indicatorStyle, setIndicatorStyle] = useState({});
     const [borderStyle, setBorderStyle] = useState({});
     const homeRef = useRef(null);
-    const projectsRef = useRef(null);
+    const HighscoresRef = useRef(null);
     const infoRef = useRef(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const activeButton =
             activeTab === 'Home' ? homeRef.current :
-                activeTab === 'Projects' ? projectsRef.current :
+                activeTab === 'Highscores' ? HighscoresRef.current :
                     infoRef.current;
 
         setIndicatorStyle({
@@ -24,6 +27,11 @@ const Menu = () => {
             transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`, // center the border below the active button
         });
     }, [activeTab]);
+
+    const handleNavigation = (tab, path) => {
+        setActiveTab(tab);
+        navigate(path);
+    };
 
     return (
         <div className="rounded-full bg-menu-green">
@@ -39,28 +47,28 @@ const Menu = () => {
                     className="absolute bottom-[-9px] left-0 h-[3px] bg-menu-yellow transition-all duration-[400ms] ease-in-out"
                     style={{
                         ...borderStyle,
-                        borderBottomLeftRadius: '4px', // Adjust the value as needed
+                        borderBottomLeftRadius: '4px',
                         borderBottomRightRadius: '4px'
                     }}
                 ></div>
 
                 <button
                     ref={homeRef}
-                    onClick={() => setActiveTab('Home')}
+                    onClick={() => handleNavigation('Home', '/')}
                     className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
                 >
                     Home
                 </button>
                 <button
-                    ref={projectsRef}
-                    onClick={() => setActiveTab('Projects')}
+                    ref={HighscoresRef}
+                    onClick={() => handleNavigation('Highscores', '/highscores')}
                     className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
                 >
-                    Projects
+                    Highscores
                 </button>
                 <button
                     ref={infoRef}
-                    onClick={() => setActiveTab('Info')}
+                    onClick={() => handleNavigation('Info', '/info')}
                     className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
                 >
                     Info
