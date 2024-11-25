@@ -14,8 +14,8 @@ function Pokedex() {
         <div className="min-h-screen flex items-center justify-center">
             <div className="relative w-2/3 h-[70vh] bg-red-600 rounded-lg border-2 border-black flex flex-col mt-20">
                 {/* Top Section */}
-                <div className="flex items-center justify-between px-12 py-4 border-b-2 border-black">
-                    <img className="h-16" src="../luzes.svg" alt="Botão azul" />
+                <div className="flex items-center justify-between px-8 py-4 border-b-2 border-black">
+                    <img className="h-16 mr-4" src="../luzes.svg" alt="Botão azul" />
                     <input
                         type="text"
                         placeholder="Search your Pokémon"
