@@ -17,15 +17,21 @@ const Menu = () => {
                 activeTab === 'Highscores' ? HighscoresRef.current :
                     infoRef.current;
 
-        setIndicatorStyle({
-            width: `${activeButton.offsetWidth}px`,
-            transform: `translateX(${activeButton.offsetLeft}px)`,
-        });
+        if (activeButton) {
+            const timeout = setTimeout(() => {
+                setIndicatorStyle({
+                    width: `${activeButton.offsetWidth}px`,
+                    transform: `translateX(${activeButton.offsetLeft}px)`,
+                });
 
-        setBorderStyle({
-            width: `${activeButton.offsetWidth / 2}px`, // half the width of the active button
-            transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`, // center the border below the active button
-        });
+                setBorderStyle({
+                    width: `${activeButton.offsetWidth / 2}px`, // half the width of the active button
+                    transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`, // center the border below the active button
+                });
+            }, 100);
+
+            return () => clearTimeout(timeout);
+        }
     }, [activeTab]);
 
     const handleNavigation = (tab, path) => {
@@ -55,21 +61,21 @@ const Menu = () => {
                 <button
                     ref={homeRef}
                     onClick={() => handleNavigation('Home', '/')}
-                    className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
+                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
                 >
                     Home
                 </button>
                 <button
                     ref={HighscoresRef}
                     onClick={() => handleNavigation('Highscores', '/highscores')}
-                    className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
+                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
                 >
                     Highscores
                 </button>
                 <button
                     ref={infoRef}
                     onClick={() => handleNavigation('Info', '/info')}
-                    className={`relative px-6 py-1.5 rounded-full focus:outline-none z-10 text-white`}
+                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
                 >
                     Info
                 </button>
