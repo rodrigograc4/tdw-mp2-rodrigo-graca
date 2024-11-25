@@ -5,7 +5,7 @@ export const pokemonApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
     endpoints: (builder) => ({
         getPokemons: builder.query({
-            query: () => `pokemon?limit=151`,
+            query: () => `pokemon?limit=649`,
             transformResponse: (response) =>
                 response.results.map((pokemon, index) => ({
                     id: index + 1,
@@ -33,6 +33,10 @@ export const pokemonApi = createApi({
                     shinyFront: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/shiny/${response.id}.gif`,
                     shinyBack: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/back/shiny/${response.id}.gif`,
                 },
+                moves: response.moves.map((move) => ({
+                    name: move.move.name,
+                    url: move.move.url,
+                })),
             }),
         }),
     }),
