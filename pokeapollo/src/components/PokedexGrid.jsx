@@ -27,7 +27,7 @@ const PokedexGrid = ({ pokemons, isLoading, searchTerm }) => {
     );
 
     return (
-        <div className="flex-grow overflow-auto p-4 scrollbar-hide">
+        <div className="flex-grow overflow-auto p-4 custom-scrollbar">
             <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
                 {isLoading
                     ? Array.from({ length: 21 }).map((_, index) => (
