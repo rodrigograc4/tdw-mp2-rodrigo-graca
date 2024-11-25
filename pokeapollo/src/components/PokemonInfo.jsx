@@ -21,7 +21,7 @@ const PokemonInfo = () => {
     const maxStat = 160;
 
     return (
-        <div className="flex-grow overflow-auto p-4 scrollbar-hide">
+        <div className="flex-grow overflow-auto p-4 custom-scrollbar">
             <div className="p-6 bg-white rounded-lg grid grid-cols-1 xl:grid-cols-2 gap-12">
                 {/* Row 1 */}
                 <div className="flex justify-center items-center bg-gray-100 rounded-lg">
