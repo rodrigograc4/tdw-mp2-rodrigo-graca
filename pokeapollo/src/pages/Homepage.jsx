@@ -1,11 +1,11 @@
 import React from 'react';
+import Pokedex from '../components/Pokedex';
 
 function Homepage() {
     return (
-        <div>
-            <div className="w-3/5 mx-auto flex flex-col items-center justify-center min-h-screen">
-            </div>
-        </div >
+        <div className="min-h-screen flex items-center justify-center">
+            <Pokedex />
+        </div>
     );
 }
 

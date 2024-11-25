@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="App bg-grass-green" style={{ fontFamily: 'Pokemon DS' }}>
+    <div className="App" style={{ fontFamily: 'Pokemon DS' }}>
       <Router>
         <Navbar />
         <Routes>
