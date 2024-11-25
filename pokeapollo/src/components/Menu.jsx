@@ -6,7 +6,7 @@ const Menu = () => {
     const [indicatorStyle, setIndicatorStyle] = useState({});
     const [borderStyle, setBorderStyle] = useState({});
     const homeRef = useRef(null);
-    const HighscoresRef = useRef(null);
+    const pokedexRef = useRef(null);
     const infoRef = useRef(null);
 
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Menu = () => {
     useEffect(() => {
         const activeButton =
             activeTab === 'Home' ? homeRef.current :
-                activeTab === 'Highscores' ? HighscoresRef.current :
+                activeTab === 'Pokedex' ? pokedexRef.current :
                     infoRef.current;
 
         if (activeButton) {
@@ -66,11 +66,11 @@ const Menu = () => {
                     Home
                 </button>
                 <button
-                    ref={HighscoresRef}
-                    onClick={() => handleNavigation('Highscores', '/highscores')}
+                    ref={pokedexRef}
+                    onClick={() => handleNavigation('Pokedex', '/pokedex')}
                     className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
                 >
-                    Highscores
+                    Pokedex
                 </button>
                 <button
                     ref={infoRef}

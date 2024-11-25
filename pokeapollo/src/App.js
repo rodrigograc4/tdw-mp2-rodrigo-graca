@@ -7,6 +7,8 @@ import {
   Route,
 } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import Pokedex from "./pages/Pokedex";
+import PokemonDetail from "./pages/PokemonDetail";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" exact={true} element={<Homepage />} />
+          <Route path="/pokedex" exact={true} element={<Pokedex />} />
+          <Route path="/pokedex/:id" exact={true} element={<PokemonDetail />} />
           <Route path="*" exact={true} element={<NotFound />} />
         </Routes>
       </Router>
