@@ -19,7 +19,7 @@ function Pokedex() {
                     <input
                         type="text"
                         placeholder="Search your Pokémon"
-                        className="w-1/2 py-2 px-4 rounded text-xl"
+                        className="w-1/2 py-2 px-4 rounded text-xl focus:outline-none"
                         value={searchTerm}
                         onChange={handleSearch}
                     />

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import PokemonInfo from '../components/PokemonInfo';
 
 const PokemonDetail = () => {
@@ -13,9 +15,10 @@ const PokemonDetail = () => {
                     <img className="h-16" src="../luzes.svg" alt="Botão azul" />
                     <button
                         onClick={() => navigate('/pokedex')}
-                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+                        className="text-white hover:text-gray-300 transition"
+                        aria-label="Go Back"
                     >
-                        Go Back
+                        <FontAwesomeIcon icon={faArrowLeft} size="2x" />
                     </button>
                 </div>
 
