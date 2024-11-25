@@ -40,15 +40,15 @@ const Pokedex = () => {
     );
 
     return (
-        <div className="relative w-2/3 h-[66vh] bg-red-600 rounded-lg border-2 border-black flex flex-col">
+        <div className="relative w-2/3 h-[70vh] bg-red-600 rounded-lg border-2 border-black flex flex-col mt-20">
             {/* Topo */}
             <div className="flex-none p-4">
-                <img className="absolute top-2 left-10 h-12" src="luzes.svg" alt="Botão azul" />
-                <div className="absolute top-16 left-0 w-full h-0.5 bg-black"></div>
+                <img className="absolute top-2 left-10 h-16" src="luzes.svg" alt="Botão azul" />
+                <div className="absolute top-20 left-0 w-full h-0.5 bg-black"></div>
             </div>
 
             {/* Grid Scroll */}
-            <div className="flex-grow mt-8 overflow-auto p-4 scrollbar-hide">
+            <div className="flex-grow mt-16 overflow-auto p-4 scrollbar-hide">
                 <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
                     {isLoading
                         ? Array.from({ length: 18 }).map((_, index) => (
