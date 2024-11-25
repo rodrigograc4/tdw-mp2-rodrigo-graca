@@ -1,34 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from 'react';
+import { useGetPokemonsQuery } from '../pokemonApi';
 
 const Pokedex = () => {
-    const [pokemons, setPokemons] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const { data: pokemons = [], isLoading } = useGetPokemonsQuery(); // RTK Query hook
+    const [searchTerm, setSearchTerm] = useState('');
 
-    // Função para buscar dados dos Pokémon
-    const fetchPokemonData = async () => {
-        const fetchedPokemons = [];
-
-        // Buscando Pokémon de 1 a 151
-        for (let i = 1; i <= 151; i++) {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`);
-            const data = await response.json();
-            const formattedName = data.name.charAt(0).toUpperCase() + data.name.slice(1);
-
-            fetchedPokemons.push({
-                id: i,
-                name: formattedName,
-                image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`,
-            });
-        }
-
-        setPokemons(fetchedPokemons);
-        setIsLoading(false); // Finaliza o carregamento
+    // Função para lidar com o input de busca
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
     };
 
-    // Chamar a função de fetch quando o componente for montado
-    useEffect(() => {
-        fetchPokemonData();
-    }, []);
+    // Filtrar Pokémon com base no termo de busca
+    const filteredPokemons = pokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     // Skeleton card para o carregamento
     const SkeletonCard = () => (
@@ -42,36 +27,37 @@ const Pokedex = () => {
     return (
         <div className="relative w-2/3 h-[70vh] bg-red-600 rounded-lg border-2 border-black flex flex-col mt-20">
             {/* Topo */}
-            <div className="flex-none p-4">
-                <img className="absolute top-2 left-10 h-16" src="luzes.svg" alt="Botão azul" />
-                <div className="absolute top-20 left-0 w-full h-0.5 bg-black"></div>
+            <div className="flex items-center justify-between px-12 py-4 border-b-2 border-black">
+                <img className="h-16" src="luzes.svg" alt="Botão azul" />
+                <input
+                    type="text"
+                    placeholder="Search your Pokémon"
+                    className="w-1/2 py-2 px-4 rounded text-xl"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
             </div>
 
             {/* Grid Scroll */}
-            <div className="flex-grow mt-16 overflow-auto p-4 scrollbar-hide">
+            <div className="flex-grow overflow-auto p-4 scrollbar-hide">
                 <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-4">
                     {isLoading
                         ? Array.from({ length: 18 }).map((_, index) => (
                             <SkeletonCard key={index} />
                         ))
-                        : pokemons.map((pokemon) => (
+                        : filteredPokemons.map((pokemon) => (
                             <div
                                 key={pokemon.id}
                                 className="bg-white rounded-lg shadow-md border border-gray-300 flex items-center"
                             >
-                                {/* Imagem do Pokémon */}
                                 <img
                                     src={pokemon.image}
                                     alt={pokemon.name}
                                     className="h-20 w-20 mx-4 object-contain"
                                 />
-
-                                {/* Nome do Pokémon */}
                                 <div className="flex-grow">
                                     <p className="text-3xl text-black">{pokemon.name}</p>
                                 </div>
-
-                                {/* Número do Pokémon */}
                                 <p className="mx-4 text-gray-400 text-3xl">{`#${pokemon.id}`}</p>
                             </div>
                         ))}
