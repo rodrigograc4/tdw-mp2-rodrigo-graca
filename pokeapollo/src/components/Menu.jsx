@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Menu = () => {
-    const [activeTab, setActiveTab] = useState('Home');
+    const [activeTab, setActiveTab] = useState('');
     const [indicatorStyle, setIndicatorStyle] = useState({});
     const [borderStyle, setBorderStyle] = useState({});
     const homeRef = useRef(null);
@@ -10,6 +10,18 @@ const Menu = () => {
     const infoRef = useRef(null);
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const currentPath = location.pathname;
+        if (currentPath === '/') {
+            setActiveTab('Home');
+        } else if (currentPath === '/pokedex') {
+            setActiveTab('Pokedex');
+        } else if (currentPath === '/info') {
+            setActiveTab('Info');
+        }
+    }, [location]);
 
     useEffect(() => {
         const activeButton =
@@ -25,8 +37,8 @@ const Menu = () => {
                 });
 
                 setBorderStyle({
-                    width: `${activeButton.offsetWidth / 2}px`, // half the width of the active button
-                    transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`, // center the border below the active button
+                    width: `${activeButton.offsetWidth / 2}px`,
+                    transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`,
                 });
             }, 100);
 
