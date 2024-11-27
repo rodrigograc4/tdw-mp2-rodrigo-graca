@@ -5,13 +5,21 @@ export const pokemonApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
     endpoints: (builder) => ({
         getPokemons: builder.query({
-            query: () => `pokemon?limit=649`,
-            transformResponse: (response) =>
-                response.results.map((pokemon, index) => ({
-                    id: index + 1,
-                    name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
-                    image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
-                })),
+            query: () => `pokemon?limit=151`,
+            transformResponse: async (response) => {
+                const resultsWithTypes = await Promise.all(
+                    response.results.map(async (pokemon, index) => {
+                        const detailsResponse = await fetch(pokemon.url).then((res) => res.json());
+                        return {
+                            id: index + 1,
+                            name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+                            types: detailsResponse.types.map((typeInfo) => typeInfo.type.name),
+                            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`,
+                        };
+                    })
+                );
+                return resultsWithTypes;
+            },
         }),
         getPokemonDetails: builder.query({
             query: (id) => `pokemon/${id}`,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const PokedexGrid = ({ pokemons, isLoading, searchTerm }) => {
+const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType }) => {
     const navigate = useNavigate();
 
     const [loadedImages, setLoadedImages] = useState({});
@@ -22,9 +22,11 @@ const PokedexGrid = ({ pokemons, isLoading, searchTerm }) => {
         </div>
     );
 
-    const filteredPokemons = pokemons.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredPokemons = pokemons.filter((pokemon) => {
+        const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesType = selectedType === '' || pokemon.types.includes(selectedType.toLowerCase());
+        return matchesSearch && matchesType;
+    });
 
     return (
         <div className="flex-grow overflow-auto p-4 custom-scrollbar">
@@ -40,11 +42,9 @@ const PokedexGrid = ({ pokemons, isLoading, searchTerm }) => {
                             className="p-1 bg-white rounded-lg shadow-md border border-gray-300 flex items-center cursor-pointer hover:shadow-lg transition"
                         >
                             <div className="w-[5.25em] h-[5.25em] mx-4 relative">
-                                {/* Esqueleto */}
                                 {!loadedImages[pokemon.id] && (
                                     <div className="absolute w-full h-full rounded bg-gray-300 animate-pulse"></div>
                                 )}
-                                {/* Imagem */}
                                 <img
                                     src={pokemon.image}
                                     alt={pokemon.name}
