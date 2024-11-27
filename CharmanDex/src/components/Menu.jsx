@@ -7,6 +7,7 @@ const Menu = () => {
     const [borderStyle, setBorderStyle] = useState({});
     const homeRef = useRef(null);
     const pokedexRef = useRef(null);
+    const catchRef = useRef(null);
     const infoRef = useRef(null);
 
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ const Menu = () => {
             setActiveTab('Home');
         } else if (currentPath === '/pokedex') {
             setActiveTab('Pokedex');
+        } else if (currentPath === '/catch') {
+            setActiveTab('Catch');
         } else if (currentPath === '/info') {
             setActiveTab('Info');
         }
@@ -27,7 +30,8 @@ const Menu = () => {
         const activeButton =
             activeTab === 'Home' ? homeRef.current :
                 activeTab === 'Pokedex' ? pokedexRef.current :
-                    infoRef.current;
+                    activeTab === 'Catch' ? catchRef.current :
+                        infoRef.current;
 
         if (activeButton) {
             const timeout = setTimeout(() => {
@@ -83,6 +87,13 @@ const Menu = () => {
                     className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
                 >
                     Pokedex
+                </button>
+                <button
+                    ref={catchRef}
+                    onClick={() => handleNavigation('Catch', '/catch')}
+                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
+                >
+                    Catch
                 </button>
                 <button
                     ref={infoRef}

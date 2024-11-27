@@ -14,8 +14,13 @@ function Homepage() {
                     label="Pokedex"
                 />
                 <Button
+                    onClick={() => navigate('/catch')}
+                    imageSrc="../botao2.png"
+                    label="Catch"
+                />
+                <Button
                     onClick={() => navigate('/info')}
-                    imageSrc="../botao2.svg"
+                    imageSrc="../botao3.svg"
                     label="Info"
                 />
             </div>

@@ -10,7 +10,7 @@ function Button({ onClick, imageSrc, label }) {
                 <img
                     src={imageSrc}
                     alt={`Botão ${label}`}
-                    className="w-96 h-48"
+                    className="w-96"
                 />
                 <span className="absolute inset-0 flex items-center justify-center text-white text-6xl">
                     {label}
