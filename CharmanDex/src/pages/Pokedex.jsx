@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGetPokemonsQuery } from '../pokemonApi';
 import PokedexGrid from '../components/PokedexGrid';
 
@@ -6,6 +6,18 @@ function Pokedex() {
     const { data: pokemons = [], isLoading } = useGetPokemonsQuery();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
+    const [caught, setCaught] = useState([]);
+
+    useEffect(() => {
+        fetch('/caught.json')
+            .then((response) => response.json())
+            .then((data) => {
+                const caughtLowerCase = data.caught.map((pokemon) => pokemon.toLowerCase());
+                setCaught(caughtLowerCase);
+            })
+            .catch((error) => console.error('Error loading caught.json:', error));
+    }, []);
+
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -61,6 +73,7 @@ function Pokedex() {
                     isLoading={isLoading}
                     searchTerm={searchTerm}
                     selectedType={selectedType}
+                    caught={caught}
                 />
             </div>
         </div>
