@@ -1,21 +1,22 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetPokemonDetailsQuery } from '../pokemonApi';
+import SkeletonPokemonInfo from './SkeletonPokemonInfo';
 
 const PokemonInfo = () => {
     const { id } = useParams();
     const { data: pokemon, isLoading, error } = useGetPokemonDetailsQuery(id);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <SkeletonPokemonInfo />;
     }
 
     if (error) {
-        return <div>Error fetching Pokémon details.</div>;
+        return <div className='px-6 py-4 text-3xl text-white'>Error fetching Pokémon details.</div>;
     }
 
     if (!pokemon) {
-        return <div>No Pokémon found</div>;
+        return <div className='px-6 py-4 text-3xl text-white'>No Pokémon found</div>;
     }
 
     const maxStat = 160;
