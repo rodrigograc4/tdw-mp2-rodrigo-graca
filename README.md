@@ -1,7 +1,7 @@
-# ⚡Poke Apollo
+# ⚡CharmanDex
 
 ## ℹ️ Sobre
-Poke Apollo é um jogo de batalhas Pokémon desenvolvido como parte do módulo M1B da disciplina de Tecnologias de Desenvolvimento Web. Inicialmente, o objetivo é aplicar os conhecimentos de JavaScript, uso de APIs externas e estruturação de interfaces dinâmicas.
+CharmanDex é um jogo de batalhas Pokémon desenvolvido como parte do módulo M1B da disciplina de Tecnologias de Desenvolvimento Web. Inicialmente, o objetivo é aplicar os conhecimentos de JavaScript, uso de APIs externas e estruturação de interfaces dinâmicas.
 
 Neste jogo, o jogador vai escolher o seu nome, pode escolher um Pokémon e também os seus ataques antes de entrar em combate contra outros Pokémons gerados aleatoriamente.
 
