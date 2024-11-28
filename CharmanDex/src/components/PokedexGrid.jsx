@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useGetPokemonDocumentsQuery } from '../redux/pokemonFirestore';
 
-const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType, caught }) => {
+const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType }) => {
     const navigate = useNavigate();
     const [loadedImages, setLoadedImages] = useState({});
+
+    const getDocs = useGetPokemonDocumentsQuery();
+    const caught = useSelector((state) => state.caught);
 
     const handleImageLoad = (id) => {
         setLoadedImages((prev) => ({ ...prev, [id]: true }));

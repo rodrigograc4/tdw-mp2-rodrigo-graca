@@ -8,7 +8,7 @@ const Navbar = () => {
             {/* Logo à esquerda */}
             <div className="hidden lg:flex items-center space-x-3 px-6 py-2.5 rounded-full text-white text-3xl bg-menu-green">
                 <img src="../logo.png" alt="User profile" className="h-7 w-7 rounded-full" />
-                <span className="hidden sm:block">CharmanDex</span> {/* Exibe somente em telas maiores */}
+                <span className="hidden sm:block">CharmanDex</span>
             </div>
 
             {/* Menu à direita (sempre visível) */}

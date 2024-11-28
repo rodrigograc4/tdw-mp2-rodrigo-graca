@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useGetPokemonsQuery, useGetPokemonDocumentsQuery } from '../pokemonApi';
+import React, { useState } from 'react';
+import { useGetPokemonsQuery } from '../redux/pokeApi';
 import PokedexGrid from '../components/PokedexGrid';
 
 function Pokedex() {
     const { data: pokemons = [], isLoading } = useGetPokemonsQuery();
-    const { data: caughtDocument = [], isLoading: isLoadingCaptured } = useGetPokemonDocumentsQuery();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
-
-    const caught = caughtDocument.map((pokemon) => pokemon.id.toLowerCase());
-
-    console.log(caught)
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -66,7 +61,6 @@ function Pokedex() {
                     isLoading={isLoading}
                     searchTerm={searchTerm}
                     selectedType={selectedType}
-                    caught={caught}
                 />
             </div>
         </div>

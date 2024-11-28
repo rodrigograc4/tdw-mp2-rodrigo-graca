@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useGetPokemonDetailsQuery, useAddPokemonDocumentMutation } from '../pokemonApi';
+import { useGetPokemonDetailsQuery } from '../redux/pokeApi';
+import { useAddPokemonDocumentMutation } from '../redux/pokemonFirestore';
 
 function Catch() {
     const [pokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
     const { data: pokemon, isLoading } = useGetPokemonDetailsQuery(pokemonId);
-    const [addPokemonDocument] = useAddPokemonDocumentMutation(); // Hook da mutação para Firestore
+    const [addPokemonDocument] = useAddPokemonDocumentMutation();
     const [captured, setCaptured] = useState(false);
     const [isShaking, setIsShaking] = useState(false);
     const [attemptingCapture, setAttemptingCapture] = useState(false);
@@ -22,20 +23,17 @@ function Catch() {
         setAttemptingCapture(true);
 
         // Definições da trajetória de arco
-        const steps = 50; // Número de etapas da animação
-        const startBottom = 5; // Posição inicial em porcentagem
-        const endBottom = 70; // Posição final em porcentagem
-        const peakHeight = 80; // Altura máxima da curva
-        const startLeft = 40; // Posição inicial horizontal em porcentagem
-        const endLeft = 82; // Posição final horizontal em porcentagem
+        const steps = 50;
+        const startBottom = 5;
+        const endBottom = 70;
+        const peakHeight = 80;
+        const startLeft = 40;
+        const endLeft = 82;
 
         for (let i = 0; i <= steps; i++) {
             const progress = i / steps;
 
-            // Interpolação linear para o eixo horizontal (esquerda)
             const interpolatedLeft = startLeft + (endLeft - startLeft) * progress;
-
-            // Interpolação parabólica para o eixo vertical (altura)
             const interpolatedBottom =
                 startBottom +
                 peakHeight * (1 - Math.pow((progress - 0.5), 2));
@@ -46,42 +44,37 @@ function Catch() {
                 transform: 'translate(-50%, 50%)',
             });
 
-            await new Promise((resolve) => setTimeout(resolve, 12)); // Controla a suavidade da animação
+            await new Promise((resolve) => setTimeout(resolve, 12));
         }
 
-        // Esconde o Pokémon após a Pokébola chegar ao centro
         setPokemonVisible(false);
 
-        await new Promise((resolve) => setTimeout(resolve, 300)); // Espera o término da animação (0.5s)
+        await new Promise((resolve) => setTimeout(resolve, 300));
 
-        // Faz a Pokébola "cair" um pouco
+        // Faz a Pokébola cair
         setPokeballPosition((prev) => ({
             ...prev,
-            bottom: '55%', // Ajuste para queda
+            bottom: '55%',
         }));
 
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera a Pokébola cair
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        // Lógica de shake e chance de escape
         for (let i = 0; i < 3; i++) {
-            // Inicia o shake
             setIsShaking(true);
-            await new Promise((resolve) => setTimeout(resolve, 500)); // Duração do shake
+            await new Promise((resolve) => setTimeout(resolve, 500));
 
-            // Termina o shake
             setIsShaking(false);
-            await new Promise((resolve) => setTimeout(resolve, 500)); // Pausa antes do próximo shake
+            await new Promise((resolve) => setTimeout(resolve, 500));
 
-            // Verifica se o Pokémon escapa (20% de chance)
+            // Verifica se o Pokémon foge 
             if (Math.random() < 0.2) {
-                setPokemonVisible(true); // Reaparece o Pokémon
-                setPokeballPosition({ bottom: '5rem', left: '40%', transform: 'translate(-50%, 0)' }); // Retorna a Pokébola à posição inicial
+                setPokemonVisible(true);
+                setPokeballPosition({ bottom: '5rem', left: '40%', transform: 'translate(-50%, 0)' });
                 setAttemptingCapture(false);
-                return; // Pokémon escapa
+                return;
             }
         }
 
-        // Se chegou aqui, captura foi bem-sucedida
         setCaptured(true);
 
         // Adiciona ao Firestore caso ainda não exista
@@ -92,7 +85,7 @@ function Catch() {
             console.error('Erro ao adicionar Pokémon capturado:', error);
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 1500)); // Espera 1 segundo antes de redirecionar
+        await new Promise((resolve) => setTimeout(resolve, 1500));
         setRedirect(true);
     };
 
@@ -113,22 +106,22 @@ function Catch() {
             >
                 {/* Pokébola animada */}
                 <div
-                    className={`z-10 absolute cursor-pointer ${isShaking ? 'animate-shake' : ''}`}
+                    className={`z-10 absolute cursor-pointer ${isShaking ? 'animate-shake' : ''} `}
                     style={{
                         ...pokeballPosition,
                         position: 'absolute',
-                        transition: 'all 0.2s ease', // Suaviza a animação de movimento
+                        transition: 'all 0.2s ease',
                     }}
                     onClick={handlePokeballClick}
                 >
                     <img
-                        className={`h-16 w-16 ${captured ? 'shadow-[0px_0px_20px_10px_rgba(255,200,30,0.7)] rounded-full' : ''}`}
+                        className={`h-16 w-16 ${attemptingCapture ? 'spin' : ''} ${captured ? 'shadow-[0px_0px_20px_10px_rgba(255,200,30,0.7)] rounded-full' : ''}`}
                         src="../pokeball.png"
                         alt="Pokébola"
                     />
                 </div>
 
-                {/* Pokémon na tela */}
+                {/* Pokémon */}
                 {!captured && pokemonVisible && (
                     <div className="absolute top-1/3 left-3/4 transform -translate-y-1/2 transition-opacity duration-500">
                         <img
@@ -139,7 +132,7 @@ function Catch() {
                     </div>
                 )}
 
-                {/* Texto de Parabéns */}
+                {/* Congratulations */}
                 {captured && (
                     <div className="absolute mt-32 left-1/2 transform -translate-x-1/2 text-white text-4xl">
                         Congratulations!

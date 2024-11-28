@@ -1,11 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useGetPokemonDetailsQuery } from '../pokemonApi';
+import { useGetPokemonDetailsQuery } from '../redux/pokeApi';
+import { useGetPokemonDocumentsQuery } from '../redux/pokemonFirestore';
 import SkeletonPokemonInfo from './SkeletonPokemonInfo';
 
 const PokemonInfo = () => {
     const { id } = useParams();
     const { data: pokemon, isLoading, error } = useGetPokemonDetailsQuery(id);
+
+    const getDocs = useGetPokemonDocumentsQuery();
+    const caught = useSelector((state) => state.caught);
+    const isCaught = pokemon && caught.includes(pokemon.name?.toLowerCase());
 
     if (isLoading) {
         return <SkeletonPokemonInfo />;
@@ -33,7 +39,16 @@ const PokemonInfo = () => {
                     />
                 </div>
                 <div className="flex flex-col justify-center">
-                    <h1 className="text-6xl text-gray-800 text-center">{pokemon.name}</h1>
+                    <h1 className="text-6xl text-gray-800 text-center flex items-center justify-center">
+                        {pokemon.name}
+                        {isCaught && (
+                            <img
+                                src="/pokeball.png"
+                                alt="Pokébola"
+                                className="w-10 h-10 ml-4 mt-1"
+                            />
+                        )}
+                    </h1>
                     <p className="text-4xl text-gray-400 text-center mb-4">#{pokemon.id}</p>
                     <div className="flex flex-col justify-center">
                         <h2 className="text-3xl font-semibold mb-4 text-left">Types</h2>
