@@ -1,9 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { db } from './firebaseConfig'; // Importa a configuração do Firestore
+import { collection, getDocs, addDoc } from 'firebase/firestore';
 
+// API combinando PokeAPI e Firestore
 export const pokemonApi = createApi({
     reducerPath: 'pokemonApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
     endpoints: (builder) => ({
+        // Endpoint para obter Pokémons da PokeAPI
         getPokemons: builder.query({
             query: () => `pokemon?limit=151`,
             transformResponse: async (response) => {
@@ -21,6 +25,7 @@ export const pokemonApi = createApi({
                 return resultsWithTypes;
             },
         }),
+        // Endpoint para obter detalhes de um Pokémon
         getPokemonDetails: builder.query({
             query: (id) => `pokemon/${id}`,
             transformResponse: (response) => ({
@@ -47,7 +52,35 @@ export const pokemonApi = createApi({
                 })),
             }),
         }),
+        // Endpoint para obter documentos da coleção "caught" no Firestore
+        getPokemonDocuments: builder.query({
+            async queryFn() {
+                try {
+                    const querySnapshot = await getDocs(collection(db, 'caught'));
+                    const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+                    return { data };
+                } catch (error) {
+                    return { error: error.message };
+                }
+            },
+        }),
+        // Endpoint para adicionar um documento à coleção "caught" no Firestore
+        addPokemonDocument: builder.mutation({
+            async queryFn(newPokemon) {
+                try {
+                    const docRef = await addDoc(collection(db, 'caught'), newPokemon);
+                    return { data: { id: docRef.id, ...newPokemon } };
+                } catch (error) {
+                    return { error: error.message };
+                }
+            },
+        }),
     }),
 });
 
-export const { useGetPokemonsQuery, useGetPokemonDetailsQuery } = pokemonApi;
+export const {
+    useGetPokemonsQuery,
+    useGetPokemonDetailsQuery,
+    useGetPokemonDocumentsQuery,
+    useAddPokemonDocumentMutation,
+} = pokemonApi;

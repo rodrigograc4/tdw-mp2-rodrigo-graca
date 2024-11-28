@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useGetPokemonsQuery } from '../pokemonApi';
+import { useGetPokemonsQuery, useGetPokemonDocumentsQuery } from '../pokemonApi';
 import PokedexGrid from '../components/PokedexGrid';
 
 function Pokedex() {
     const { data: pokemons = [], isLoading } = useGetPokemonsQuery();
+    const { data: caughtDocument = [], isLoading: isLoadingCaptured } = useGetPokemonDocumentsQuery();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
-    const [caught, setCaught] = useState([]);
 
-    useEffect(() => {
-        fetch('/caught.json')
-            .then((response) => response.json())
-            .then((data) => {
-                const caughtLowerCase = data.caught.map((pokemon) => pokemon.toLowerCase());
-                setCaught(caughtLowerCase);
-            })
-            .catch((error) => console.error('Error loading caught.json:', error));
-    }, []);
+    const caught = caughtDocument.map((pokemon) => pokemon.id.toLowerCase());
 
+    console.log(caught)
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);

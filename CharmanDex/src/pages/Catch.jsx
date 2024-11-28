@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useGetPokemonDetailsQuery } from '../pokemonApi'; // Assumindo que o hook já foi exportado corretamente
+import { useGetPokemonDetailsQuery, useAddPokemonDocumentMutation } from '../pokemonApi';
 
 function Catch() {
     const [pokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
     const { data: pokemon, isLoading } = useGetPokemonDetailsQuery(pokemonId);
+    const [addPokemonDocument] = useAddPokemonDocumentMutation(); // Hook da mutação para Firestore
     const [captured, setCaptured] = useState(false);
     const [isShaking, setIsShaking] = useState(false);
     const [attemptingCapture, setAttemptingCapture] = useState(false);
@@ -45,7 +46,7 @@ function Catch() {
                 transform: 'translate(-50%, 50%)',
             });
 
-            await new Promise((resolve) => setTimeout(resolve, 15)); // Controla a suavidade da animação
+            await new Promise((resolve) => setTimeout(resolve, 12)); // Controla a suavidade da animação
         }
 
         // Esconde o Pokémon após a Pokébola chegar ao centro
@@ -82,6 +83,15 @@ function Catch() {
 
         // Se chegou aqui, captura foi bem-sucedida
         setCaptured(true);
+
+        // Adiciona ao Firestore caso ainda não exista
+        try {
+            const response = await addPokemonDocument({ id: pokemon.name.toLowerCase() }).unwrap();
+            console.log('Pokémon capturado com sucesso:', response);
+        } catch (error) {
+            console.error('Erro ao adicionar Pokémon capturado:', error);
+        }
+
         await new Promise((resolve) => setTimeout(resolve, 1500)); // Espera 1 segundo antes de redirecionar
         setRedirect(true);
     };
