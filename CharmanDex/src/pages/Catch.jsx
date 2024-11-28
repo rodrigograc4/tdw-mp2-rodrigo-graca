@@ -32,23 +32,26 @@ function Catch() {
         // Esconde o Pokémon após a Pokébola chegar ao centro
         setPokemonVisible(false);
 
-        // Começa a balançar
-        setIsShaking(true);
-
+        // Lógica de shake e chance de escape
         for (let i = 0; i < 3; i++) {
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Pausa de 1 segundo entre balanços
-            if (Math.random() < 0.1) {
-                // 10% de chance de falha
-                setIsShaking(false);
-                setAttemptingCapture(false);
+            // Inicia o shake
+            setIsShaking(true);
+            await new Promise((resolve) => setTimeout(resolve, 500)); // Duração do shake
+
+            // Termina o shake
+            setIsShaking(false);
+            await new Promise((resolve) => setTimeout(resolve, 500)); // Pausa antes do próximo shake
+
+            // Verifica se o Pokémon escapa (20% de chance)
+            if (Math.random() < 0.2) {
                 setPokemonVisible(true); // Reaparece o Pokémon
-                setPokeballPosition({ bottom: '2rem', left: '50%', transform: 'translate(-50%, 0)' }); // Retorna à posição inicial
-                return; // O Pokémon escapa
+                setPokeballPosition({ bottom: '2rem', left: '50%', transform: 'translate(-50%, 0)' }); // Retorna a Pokébola à posição inicial
+                setAttemptingCapture(false);
+                return; // Pokémon escapa
             }
         }
 
         // Se chegou aqui, captura foi bem-sucedida
-        setIsShaking(false);
         setCaptured(true);
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera 1 segundo antes de redirecionar
         setRedirect(true);
@@ -71,11 +74,11 @@ function Catch() {
             >
                 {/* Pokébola animada */}
                 <div
-                    className={`absolute cursor-pointer ${isShaking ? 'animate-shake' : ''}`}
+                    className={`z-10 absolute cursor-pointer ${isShaking ? 'animate-shake' : ''}`}
                     style={{
                         ...pokeballPosition,
                         position: 'absolute',
-                        transition: 'all 0.5s ease', // Suaviza a animação
+                        transition: 'all 0.5s ease', // Suaviza a animação de movimento
                     }}
                     onClick={handlePokeballClick}
                 >
@@ -92,7 +95,7 @@ function Catch() {
                         <img
                             src={pokemon.sprites.frontGif}
                             alt={pokemon.name}
-                            className={`h-40 w-40`}
+                            className={`h-40`}
                         />
                     </div>
                 )}

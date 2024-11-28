@@ -39,29 +39,30 @@ body {
     background-color: #dc2626;
 }
 
-/* Shake animation */
 @keyframes shake {
-    0% {
-        transform: translateX(0);
+
+    0%,
+    100% {
+        transform: translate(-50%, 50%) rotate(0deg);
+        /* Posição inicial */
     }
 
     25% {
-        transform: translateX(-5px);
+        transform: translate(calc(-50% - 5px), 50%) rotate(-10deg);
+        /* Move para a esquerda com inclinação */
     }
 
     50% {
-        transform: translateX(5px);
+        transform: translate(calc(-50% + 5px), 50%) rotate(10deg);
+        /* Move para a direita com inclinação */
     }
 
     75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
+        transform: translate(calc(-50% - 5px), 50%) rotate(-10deg);
+        /* Move para a esquerda com inclinação */
     }
 }
 
 .animate-shake {
-    animation: shake 0.5s ease infinite;
+    animation: shake 0.5s ease;
 }
