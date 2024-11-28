@@ -32,7 +32,6 @@ function Catch() {
         // Esconde o Pokémon após a Pokébola chegar ao centro
         setPokemonVisible(false);
 
-
         await new Promise((resolve) => setTimeout(resolve, 200)); // Espera o término da animação (0.5s)
 
         // Faz a Pokébola "cair" um pouco
@@ -64,10 +63,9 @@ function Catch() {
 
         // Se chegou aqui, captura foi bem-sucedida
         setCaptured(true);
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera 1 segundo antes de redirecionar
+        await new Promise((resolve) => setTimeout(resolve, 1500)); // Espera 1 segundo antes de redirecionar
         setRedirect(true);
     };
-
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -109,6 +107,13 @@ function Catch() {
                             alt={pokemon.name}
                             className={`h-40`}
                         />
+                    </div>
+                )}
+
+                {/* Texto de Parabéns */}
+                {captured && (
+                    <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-white text-6xl">
+                        Congratulations!
                     </div>
                 )}
             </div>
