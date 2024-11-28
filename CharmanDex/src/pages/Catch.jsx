@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useGetPokemonDetailsQuery } from '../pokemonApi'; // Assumindo que o hook já foi exportado corretamente
 
 function Catch() {
-    const [pokemonId, setPokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
+    const [pokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
     const { data: pokemon, isLoading } = useGetPokemonDetailsQuery(pokemonId);
     const [captured, setCaptured] = useState(false);
     const [isShaking, setIsShaking] = useState(false);
     const [attemptingCapture, setAttemptingCapture] = useState(false);
     const [redirect, setRedirect] = useState(false);
-    const [pokeballPosition, setPokeballPosition] = useState({ bottom: '2rem', left: '50%', transform: 'translate(-50%, 0)' });
+    const [pokemonVisible, setPokemonVisible] = useState(true);
 
+    const [pokeballPosition, setPokeballPosition] = useState({
+        bottom: '2rem',
+        left: '50%',
+        transform: 'translate(-50%, 0)',
+    });
 
     const handlePokeballClick = async () => {
         if (attemptingCapture) return; // Evita múltiplos cliques
         setAttemptingCapture(true);
 
-        // Move Pokébola até o Pokémon
-        setPokeballPosition({ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' });
+        // Inicia a animação da Pokébola até o centro
+        setPokeballPosition({
+            bottom: '50%',
+            left: '50%',
+            transform: 'translate(-50%, 50%)',
+        });
 
-        await new Promise((resolve) => setTimeout(resolve, 500)); // Tempo de deslocamento
+        await new Promise((resolve) => setTimeout(resolve, 500)); // Espera o término da animação (0.5s)
+
+        // Esconde o Pokémon após a Pokébola chegar ao centro
+        setPokemonVisible(false);
 
         // Começa a balançar
         setIsShaking(true);
@@ -29,7 +41,8 @@ function Catch() {
                 // 10% de chance de falha
                 setIsShaking(false);
                 setAttemptingCapture(false);
-                setPokeballPosition({ bottom: '2rem', left: '50%' }); // Retorna à posição inicial
+                setPokemonVisible(true); // Reaparece o Pokémon
+                setPokeballPosition({ bottom: '2rem', left: '50%', transform: 'translate(-50%, 0)' }); // Retorna à posição inicial
                 return; // O Pokémon escapa
             }
         }
@@ -56,32 +69,30 @@ function Catch() {
                 className="relative w-2/3 h-[80vh] bg-green-600 rounded-lg border-2 border-black flex flex-col mt-[6rem] bg-cover bg-center"
                 style={{ backgroundImage: 'url(catch_background.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
             >
-                {/* Pokébola centralizada */}
+                {/* Pokébola animada */}
                 <div
-                    className={`absolute cursor-pointer ${isShaking ? 'animate-shake' : ''
-                        } `}
+                    className={`absolute cursor-pointer ${isShaking ? 'animate-shake' : ''}`}
                     style={{
-                        position: 'absolute',
                         ...pokeballPosition,
-                        transition: 'all 0.5s ease',
+                        position: 'absolute',
+                        transition: 'all 0.5s ease', // Suaviza a animação
                     }}
                     onClick={handlePokeballClick}
                 >
                     <img
-                        className={`h-16 w-16 ${captured ? 'shadow-[0px_0px_20px_10px_rgba(255,200,30,0.7)] rounded-full' : ''
-                            }`}
+                        className={`h-16 w-16 ${captured ? 'shadow-[0px_0px_20px_10px_rgba(255,200,30,0.7)] rounded-full' : ''}`}
                         src="../pokeball.png"
                         alt="Pokébola"
                     />
                 </div>
 
                 {/* Pokémon na tela */}
-                {!captured && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                {!captured && pokemonVisible && (
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500">
                         <img
                             src={pokemon.sprites.frontGif}
                             alt={pokemon.name}
-                            className={`h-40 w-40 transition-opacity duration-500 ${isShaking ? 'opacity-0' : 'opacity-100'}`}
+                            className={`h-40 w-40`}
                         />
                     </div>
                 )}
