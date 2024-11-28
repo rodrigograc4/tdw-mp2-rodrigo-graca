@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useGetPokemonDetailsQuery } from '../redux/pokeApi';
 import { useAddPokemonDocumentMutation } from '../redux/pokemonFirestore';
+import Pokeball from '../components/CatchElements/Pokeball';
+import PokemonDisplay from '../components/CatchElements/PokemonDisplay';
+import Message from '../components/CatchElements/Message';
 
 function Catch() {
     const [pokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
@@ -104,40 +107,19 @@ function Catch() {
                 className="relative w-2/3 h-[80vh] bg-menu-yellow rounded-lg border-2 border-black flex flex-col mt-[6rem] bg-cover bg-center"
                 style={{ backgroundImage: 'url(Arena.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
             >
-                {/* Pokébola animada */}
-                <div
-                    className={`z-10 absolute cursor-pointer ${isShaking ? 'animate-shake' : ''} `}
-                    style={{
-                        ...pokeballPosition,
-                        position: 'absolute',
-                        transition: 'all 0.2s ease',
-                    }}
+                <Pokeball
+                    position={pokeballPosition}
+                    isShaking={isShaking}
+                    attemptingCapture={attemptingCapture}
+                    captured={captured}
                     onClick={handlePokeballClick}
-                >
-                    <img
-                        className={`h-16 w-16 ${attemptingCapture ? 'spin' : ''} ${captured ? 'shadow-[0px_0px_20px_10px_rgba(255,200,30,0.7)] rounded-full' : ''}`}
-                        src="../pokeball.png"
-                        alt="Pokébola"
-                    />
-                </div>
-
-                {/* Pokémon */}
-                {!captured && pokemonVisible && (
-                    <div className="absolute top-1/3 left-3/4 transform -translate-y-1/2 transition-opacity duration-500">
-                        <img
-                            src={pokemon.sprites.frontGif}
-                            alt={pokemon.name}
-                            className="h-48 w-48 m-auto object-contain"
-                        />
-                    </div>
-                )}
-
-                {/* Congratulations */}
-                {captured && (
-                    <div className="absolute mt-32 left-1/2 transform -translate-x-1/2 text-white text-4xl">
-                        Congratulations!
-                    </div>
-                )}
+                />
+                <PokemonDisplay
+                    visible={!captured && pokemonVisible}
+                    sprite={pokemon?.sprites?.frontGif}
+                    name={pokemon?.name}
+                />
+                <Message captured={captured} />
             </div>
         </div>
     );
