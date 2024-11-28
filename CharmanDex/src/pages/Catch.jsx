@@ -11,8 +11,8 @@ function Catch() {
     const [pokemonVisible, setPokemonVisible] = useState(true);
 
     const [pokeballPosition, setPokeballPosition] = useState({
-        bottom: '2rem',
-        left: '50%',
+        bottom: '5rem',
+        left: '40%',
         transform: 'translate(-50%, 0)',
     });
 
@@ -20,24 +20,43 @@ function Catch() {
         if (attemptingCapture) return; // Evita múltiplos cliques
         setAttemptingCapture(true);
 
-        // Inicia a animação da Pokébola até o centro
-        setPokeballPosition({
-            bottom: '50%',
-            left: '50%',
-            transform: 'translate(-50%, 50%)',
-        });
+        // Definições da trajetória de arco
+        const steps = 50; // Número de etapas da animação
+        const startBottom = 5; // Posição inicial em porcentagem
+        const endBottom = 70; // Posição final em porcentagem
+        const peakHeight = 80; // Altura máxima da curva
+        const startLeft = 40; // Posição inicial horizontal em porcentagem
+        const endLeft = 82; // Posição final horizontal em porcentagem
 
-        await new Promise((resolve) => setTimeout(resolve, 500)); // Espera o término da animação (0.5s)
+        for (let i = 0; i <= steps; i++) {
+            const progress = i / steps;
+
+            // Interpolação linear para o eixo horizontal (esquerda)
+            const interpolatedLeft = startLeft + (endLeft - startLeft) * progress;
+
+            // Interpolação parabólica para o eixo vertical (altura)
+            const interpolatedBottom =
+                startBottom +
+                peakHeight * (1 - Math.pow((progress - 0.5), 2));
+
+            setPokeballPosition({
+                bottom: `${interpolatedBottom}%`,
+                left: `${interpolatedLeft}%`,
+                transform: 'translate(-50%, 50%)',
+            });
+
+            await new Promise((resolve) => setTimeout(resolve, 15)); // Controla a suavidade da animação
+        }
 
         // Esconde o Pokémon após a Pokébola chegar ao centro
         setPokemonVisible(false);
 
-        await new Promise((resolve) => setTimeout(resolve, 200)); // Espera o término da animação (0.5s)
+        await new Promise((resolve) => setTimeout(resolve, 300)); // Espera o término da animação (0.5s)
 
         // Faz a Pokébola "cair" um pouco
         setPokeballPosition((prev) => ({
             ...prev,
-            bottom: 'calc(50% - 5rem)', // Ajuste para queda
+            bottom: '55%', // Ajuste para queda
         }));
 
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera a Pokébola cair
@@ -55,7 +74,7 @@ function Catch() {
             // Verifica se o Pokémon escapa (20% de chance)
             if (Math.random() < 0.2) {
                 setPokemonVisible(true); // Reaparece o Pokémon
-                setPokeballPosition({ bottom: '2rem', left: '50%', transform: 'translate(-50%, 0)' }); // Retorna a Pokébola à posição inicial
+                setPokeballPosition({ bottom: '5rem', left: '40%', transform: 'translate(-50%, 0)' }); // Retorna a Pokébola à posição inicial
                 setAttemptingCapture(false);
                 return; // Pokémon escapa
             }
@@ -80,7 +99,7 @@ function Catch() {
         <div className="min-h-screen flex items-center justify-center">
             <div
                 className="relative w-2/3 h-[80vh] bg-green-600 rounded-lg border-2 border-black flex flex-col mt-[6rem] bg-cover bg-center"
-                style={{ backgroundImage: 'url(catch_background.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+                style={{ backgroundImage: 'url(Arena.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
             >
                 {/* Pokébola animada */}
                 <div
@@ -88,7 +107,7 @@ function Catch() {
                     style={{
                         ...pokeballPosition,
                         position: 'absolute',
-                        transition: 'all 0.5s ease', // Suaviza a animação de movimento
+                        transition: 'all 0.2s ease', // Suaviza a animação de movimento
                     }}
                     onClick={handlePokeballClick}
                 >
@@ -101,18 +120,18 @@ function Catch() {
 
                 {/* Pokémon na tela */}
                 {!captured && pokemonVisible && (
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500">
+                    <div className="absolute top-1/3 left-3/4 transform -translate-y-1/2 transition-opacity duration-500">
                         <img
                             src={pokemon.sprites.frontGif}
                             alt={pokemon.name}
-                            className={`h-40`}
+                            className="h-48 w-48 m-auto object-contain"
                         />
                     </div>
                 )}
 
                 {/* Texto de Parabéns */}
                 {captured && (
-                    <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-white text-6xl">
+                    <div className="absolute mt-32 left-1/2 transform -translate-x-1/2 text-white text-4xl">
                         Congratulations!
                     </div>
                 )}
