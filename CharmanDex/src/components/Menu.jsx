@@ -17,7 +17,7 @@ const Menu = () => {
         const currentPath = location.pathname;
         if (currentPath === '/') {
             setActiveTab('Home');
-        } else if (currentPath === '/pokedex') {
+        } else if (currentPath === '/pokedex' || /^\/pokedex\/\d+$/.test(currentPath)) {
             setActiveTab('Pokedex');
         } else if (currentPath === '/catch') {
             setActiveTab('Catch');
@@ -31,7 +31,8 @@ const Menu = () => {
             activeTab === 'Home' ? homeRef.current :
                 activeTab === 'Pokedex' ? pokedexRef.current :
                     activeTab === 'Catch' ? catchRef.current :
-                        infoRef.current;
+                        activeTab === 'Info' ? infoRef.current :
+                            homeRef.current;
 
         if (activeButton) {
             const timeout = setTimeout(() => {
