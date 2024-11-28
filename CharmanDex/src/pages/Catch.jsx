@@ -32,6 +32,17 @@ function Catch() {
         // Esconde o Pokémon após a Pokébola chegar ao centro
         setPokemonVisible(false);
 
+
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Espera o término da animação (0.5s)
+
+        // Faz a Pokébola "cair" um pouco
+        setPokeballPosition((prev) => ({
+            ...prev,
+            bottom: 'calc(50% - 5rem)', // Ajuste para queda
+        }));
+
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera a Pokébola cair
+
         // Lógica de shake e chance de escape
         for (let i = 0; i < 3; i++) {
             // Inicia o shake
@@ -56,6 +67,7 @@ function Catch() {
         await new Promise((resolve) => setTimeout(resolve, 1000)); // Espera 1 segundo antes de redirecionar
         setRedirect(true);
     };
+
 
     if (isLoading) {
         return <div>Loading...</div>;
