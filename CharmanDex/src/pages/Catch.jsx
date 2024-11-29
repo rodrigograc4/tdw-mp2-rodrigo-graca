@@ -93,7 +93,13 @@ function Catch() {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div className="min-h-screen flex items-center justify-center">
+            <div
+                className="relative w-2/3 h-[80vh] bg-menu-yellow rounded-lg border-2 border-black flex flex-col mt-[6rem] bg-cover bg-center"
+                style={{ backgroundImage: 'url(Arena.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+            >
+            </div>
+        </div>;
     }
 
     if (redirect) {
