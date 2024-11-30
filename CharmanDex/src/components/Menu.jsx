@@ -10,12 +10,12 @@ const Menu = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const tabs = [
+    const tabs = useMemo(() => [
         { name: 'Home', path: '/', ref: 'homeRef' },
         { name: 'Pokedex', path: '/pokedex', ref: 'pokedexRef' },
         { name: 'Catch', path: '/catch', ref: 'catchRef' },
         { name: 'Info', path: '/info', ref: 'infoRef' }
-    ];
+    ], []);
 
     useEffect(() => {
         const currentPath = location.pathname;
