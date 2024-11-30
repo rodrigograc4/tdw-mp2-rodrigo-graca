@@ -26,19 +26,19 @@ jobs:
       # 3. Instalar dependências
       - name: Install dependencies
         run: |
-          cd Charmandex
+          cd CharmanDex
           npm install
 
       # 4. Build do projeto
       - name: Build the project
         run: |
-          cd Charmandex
+          cd CharmanDex
           npm run build
 
       # 5. Deploy no Netlify
       - name: Deploy to Netlify
         run: |
-          npx netlify-cli deploy --dir=Charmandex/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
+          npx netlify-cli deploy --dir=CharmanDex/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
 
 
         
