@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function PokemonDisplay({ visible, sprite, name }) {
     if (!visible) return null;
@@ -9,5 +10,11 @@ function PokemonDisplay({ visible, sprite, name }) {
         </div>
     );
 }
+
+PokemonDisplay.propTypes = {
+    visible: PropTypes.bool.isRequired,
+    sprite: PropTypes.string,
+    name: PropTypes.string,
+};
 
 export default PokemonDisplay;

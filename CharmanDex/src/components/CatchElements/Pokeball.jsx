@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Pokeball({ position, isShaking, attemptingCapture, captured, onClick }) {
     return (
@@ -20,5 +21,17 @@ function Pokeball({ position, isShaking, attemptingCapture, captured, onClick })
         </div>
     );
 }
+
+Pokeball.propTypes = {
+    position: PropTypes.shape({
+        bottom: PropTypes.string.isRequired,
+        left: PropTypes.string.isRequired,
+        transform: PropTypes.string.isRequired,
+    }).isRequired,
+    isShaking: PropTypes.bool.isRequired,
+    attemptingCapture: PropTypes.bool.isRequired,
+    captured: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+};
 
 export default Pokeball;

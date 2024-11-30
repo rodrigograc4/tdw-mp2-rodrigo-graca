@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Message({ captured }) {
     if (!captured) return null;
@@ -9,5 +10,9 @@ function Message({ captured }) {
         </div>
     );
 }
+
+Message.propTypes = {
+    captured: PropTypes.bool.isRequired,
+};
 
 export default Message;
