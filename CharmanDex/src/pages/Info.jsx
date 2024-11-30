@@ -2,20 +2,26 @@ import React from 'react';
 
 const Section = ({ title, children }) => (
     <div className="mt-20">
-        <span className="flex items-center justify-center text-white text-4xl">{title}</span>
+        <span className="flex items-center justify-center text-white text-5xl p-2 rounded-lg bg-[#43719e] mb-10">{title}</span>
+        <div className="flex flex-col md:flex-row items-center">{children}</div>
+    </div>
+);
+
+const ExtraSection = ({ children }) => (
+    <div>
         <div className="flex flex-col md:flex-row items-center">{children}</div>
     </div>
 );
 
 const TextBlock = ({ children }) => (
     <div className="w-full md:w-1/2 p-4">
-        <p className="text-2xl text-white text-center">{children}</p>
+        <p className="text-2xl text-black text-center">{children}</p>
     </div>
 );
 
 const FullText = ({ children }) => (
     <div className="w-full p-4">
-        <p className="text-2xl text-white text-center">{children}</p>
+        <p className="text-2xl text-black text-center">{children}</p>
     </div>
 );
 
@@ -28,123 +34,123 @@ const ImageBlock = ({ src, alt }) => (
 function Info() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center mt-[9rem] relative">
-            <div className='w-full md:w-2/3 p-10 rounded-lg border-2 border-black bg-[#43719e] mb-20'>
-                {/* Título */}
-                <div className="flex items-center justify-center text-white text-8xl">
+            <div className='w-full md:w-2/3 p-10 rounded-lg border-2 border-black bg-white mb-20'>
+                {/* Title */}
+                <div className="flex items-center justify-center text-black text-8xl">
                     Pokemon for Dummies
                 </div>
 
-                {/* Primeira Linha */}
-                <Section title="O Mundo Pokémon">
+                {/* First Row */}
+                <Section title="The Pokémon World">
                     <TextBlock>
-                        O mundo Pokémon é fascinante, repleto de criaturas incríveis que coexistem com os humanos.
+                        The Pokémon world is fascinating, full of amazing creatures that coexist with humans.
                         <br />
-                        Cada Pokémon é único, com características que o diferenciam, como tipos, habilidades, movimentos e até mesmo formas evolutivas.
+                        Each Pokémon is unique, with characteristics that differentiate them, such as types, abilities, moves, and even evolutionary forms.
                         <br />
-                        Esses elementos näo apenas tornam cada Pokémon especial, mas também säo essenciais para estratégias de batalha e o desenvolvimento de laços com os treinadores.
+                        These elements not only make each Pokémon special but are also essential for battle strategies and building bonds with trainers.
                     </TextBlock>
                     <ImageBlock src='InfoPage/pokemons.png' alt="pokemons" />
                 </Section>
 
-                {/* Tipos Pokémon */}
-                <Section title="Tipos Pokémon">
+                {/* Pokémon Types */}
+                <Section title="Pokémon Types">
                     <FullText>
-                        Os tipos säo um dos aspectos mais importantes de um Pokémon.
+                        Types are one of the most important aspects of a Pokémon.
                         <br />
-                        Cada Pokémon tem pelo menos um tipo, mas alguns podem ter dois, o que afeta diretamente suas forças e fraquezas em batalhas.
+                        Each Pokémon has at least one type, but some may have two, which directly affects their strengths and weaknesses in battles.
                         <br />
-                        No total, existem 18 tipos diferentes, como Fogo, Água, Elétrico, Planta, Dragäo, Fantasma, Fada e muitos outros.
+                        There are a total of 18 different types, such as Fire, Water, Electric, Grass, Dragon, Ghost, Fairy, and many others.
                         <br />
-                        Esses tipos criam um sistema de vantagens e desvantagens, parecido com o jogo "pedra, papel e tesoura".
+                        These types create a system of advantages and disadvantages, similar to the game "rock, paper, scissors."
                     </FullText>
                 </Section>
 
-                {/* Exemplos de Tipos Pokémon */}
-                <Section title="Exemplos de Tipos Pokémon">
+                {/* Examples of Pokémon Types */}
+                <ExtraSection>
                     <TextBlock>
-                        Por exemplo:
+                        For example:
                         <br />
-                        Água é forte contra Fogo, mas fraco contra Elétrico e Planta.
+                        Water is strong against Fire but weak against Electric and Grass.
                         <br />
-                        Dragäo é super eficaz contra si mesmo, mas fraco contra o tipo Fada.
+                        Dragon is super effective against itself but weak against Fairy type.
                         <br />
-                        Fantasma é imune a ataques do tipo Normal.
+                        Ghost is immune to Normal-type attacks.
                         <br />
-                        Esse sistema incentiva os treinadores a montarem equipes equilibradas, capazes de enfrentar diferentes tipos de adversários.
+                        This system encourages trainers to build balanced teams that can face different types of opponents.
                     </TextBlock>
                     <ImageBlock src='InfoPage/types.png' alt="types" />
-                </Section>
+                </ExtraSection>
 
-                {/* Habilidades dos Pokémons */}
-                <Section title="Habilidades dos Pokémons">
+                {/* Pokémon Abilities */}
+                <Section title="Pokémon Abilities">
                     <FullText>
-                        Cada Pokémon possui uma habilidade única, que oferece vantagens tanto dentro quanto fora das batalhas.
+                        Each Pokémon has a unique ability that provides advantages both inside and outside of battles.
                         <br />
-                        Algumas habilidades afetam diretamente o desempenho em combate, enquanto outras têm efeitos mais sutis.
+                        Some abilities directly affect performance in combat, while others have subtler effects.
                         <br />
-                        Um Pokémon geralmente pode ter uma de duas ou três habilidades possíveis, sendo que algumas delas säo "Habilidades Ocultas", disponíveis apenas em situaçöes especiais.
+                        A Pokémon generally has one of two or three possible abilities, with some being "Hidden Abilities," available only in special situations.
                         <br />
-                        Isso adiciona um nível extra de personalizaçäo, permitindo aos treinadores adaptarem suas estratégias com base nas habilidades.
+                        This adds an extra level of customization, allowing trainers to adapt their strategies based on the abilities.
                     </FullText>
                 </Section>
 
-                {/* Exemplos de Habilidades */}
-                <Section title="Exemplos de Habilidades">
+                {/* Examples of Abilities */}
+                <ExtraSection>
                     <ImageBlock src='InfoPage/abilities.png' alt="abilities" />
                     <TextBlock>
-                        Por exemplo:
+                        For example:
                         <br />
-                        Levitate torna o Pokémon imune a ataques do tipo Terra.
+                        Levitate makes the Pokémon immune to Ground-type attacks.
                         <br />
-                        Poison Heal cura o Pokémon ao invés de causar dano quando está envenenado.
+                        Poison Heal heals the Pokémon instead of damaging it when it is poisoned.
                     </TextBlock>
-                </Section>
+                </ExtraSection>
 
                 {/* Moves */}
                 <Section title="Moves">
                     <FullText>
-                        Os movimentos, ou moves, säo as açöes que os Pokémon utilizam em batalhas.
+                        Moves are the actions that Pokémon use in battles.
                         <br />
-                        Cada Pokémon pode carregar até quatro movimentos por vez, o que exige estratégia ao escolher quais usar.
+                        Each Pokémon can carry up to four moves at a time, which requires strategy when choosing which ones to use.
                         <br />
-                        Existem três tipos principais:
+                        There are three main types:
                         <br />
-                        Físicos: Dependem do ataque físico do usuário (ex.: Earthquake).
+                        Physical: Dependent on the user's physical attack (e.g., Earthquake).
                         <br />
-                        Especiais: Baseiam-se no ataque especial do usuário (ex.: Thunderbolt).
+                        Special: Based on the user's special attack (e.g., Thunderbolt).
                         <br />
-                        De Status: Alteram atributos ou causam condiçöes, como paralisia ou sono (ex.: Swords Dance).
+                        Status: Change attributes or cause conditions like paralysis or sleep (e.g., Swords Dance).
                     </FullText>
                 </Section>
 
-                {/* Evoluçöes */}
-                <Section title="Evoluçöes">
+                {/* Evolutions */}
+                <Section title="Evolutions">
                     <TextBlock>
-                        Evoluir é uma parte importante do crescimento de um Pokémon, aumentando seus atributos e, às vezes, mudando tipos ou habilidades.
+                        Evolving is an important part of a Pokémon's growth, increasing its stats and sometimes changing types or abilities.
                         <br />
-                        Existem diversas formas de evoluçäo, como:
+                        There are several ways to evolve, such as:
                         <br />
-                        Por Nível: O método mais comum, alcançado ao ganhar experiência.
+                        By Level: The most common method, achieved by gaining experience.
                         <br />
-                        Por Itens: Pedras especiais, como a Thunder Stone, ajudam em certas evoluçöes.
+                        By Items: Special stones, like the Thunder Stone, help with certain evolutions.
                         <br />
-                        Por Amizade ou Condiçöes Específicas: Alguns Pokémon evoluem ao atingir laços fortes com o treinador ou em situaçöes únicas.
+                        By Friendship or Specific Conditions: Some Pokémon evolve by building strong bonds with the trainer or in unique situations.
                         <br />
-                        Por Troca: Certos Pokémon evoluem ao serem trocados entre treinadores.
+                        By Trade: Some Pokémon evolve when traded between trainers.
                         <br />
-                        Evoluir um Pokémon é estratégico, pois pode afetar os movimentos aprendidos e o estilo de batalha.
+                        Evolving a Pokémon is strategic, as it can affect the moves learned and the battle style.
                     </TextBlock>
                     <ImageBlock src='InfoPage/evolution.png' alt="evolutions" />
                 </Section>
 
-                {/* Conclusäo */}
-                <Section title="Conclusäo">
+                {/* Conclusion */}
+                <Section title="Conclusion">
                     <FullText>
-                        O universo Pokémon é repleto de complexidade e possibilidades, tornando cada jornada única.
+                        The Pokémon universe is full of complexity and possibilities, making each journey unique.
                         <br />
-                        Desde capturar e treinar, até escolher os melhores movimentos e estratégias, o mundo Pokémon oferece infinitas oportunidades de exploraçäo e diversäo.
+                        From capturing and training to choosing the best moves and strategies, the Pokémon world offers endless opportunities for exploration and fun.
                         <br />
-                        Seja você um treinador iniciante ou veterano, há sempre algo novo para aprender ou experimentar.
+                        Whether you are a beginner or a veteran trainer, there is always something new to learn or experience.
                     </FullText>
                 </Section>
             </div>
