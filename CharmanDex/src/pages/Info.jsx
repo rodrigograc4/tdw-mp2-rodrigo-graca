@@ -17,7 +17,7 @@ function Info() {
                             <br />
                             Cada Pokémon é único, com características que o diferenciam, como tipos, habilidades, movimentos e até mesmo formas evolutivas.
                             <br />
-                            Esses elementos não apenas tornam cada Pokémon especial, mas também são essenciais para estratégias de batalha e o desenvolvimento de laços com os treinadores.
+                            Esses elementos näo apenas tornam cada Pokémon especial, mas também säo essenciais para estratégias de batalha e o desenvolvimento de laços com os treinadores.
                         </p>
                     </div>
                     <div className="w-full md:w-1/2 py-4 flex justify-center">
@@ -34,11 +34,11 @@ function Info() {
                 <div className="flex flex-col md:flex-row items-center">
                     <div className="w-full p-4">
                         <p className="text-2xl text-white text-center">
-                            Os tipos são um dos aspectos mais importantes de um Pokémon.
+                            Os tipos säo um dos aspectos mais importantes de um Pokémon.
                             <br />
                             Cada Pokémon tem pelo menos um tipo, mas alguns podem ter dois, o que afeta diretamente suas forças e fraquezas em batalhas.
                             <br />
-                            No total, existem 18 tipos diferentes, como Fogo, Água, Elétrico, Planta, Dragão, Fantasma, Fada e muitos outros.
+                            No total, existem 18 tipos diferentes, como Fogo, Água, Elétrico, Planta, Dragäo, Fantasma, Fada e muitos outros.
                             <br />
                             Esses tipos criam um sistema de vantagens e desvantagens, parecido com o jogo "pedra, papel e tesoura".
                         </p>
@@ -54,7 +54,7 @@ function Info() {
 
                             Água é forte contra Fogo, mas fraco contra Elétrico e Planta.
                             <br />
-                            Dragão é super eficaz contra si mesmo, mas fraco contra o tipo Fada.
+                            Dragäo é super eficaz contra si mesmo, mas fraco contra o tipo Fada.
                             <br />
                             Fantasma é imune a ataques do tipo Normal.
                             <br />
@@ -79,9 +79,9 @@ function Info() {
                             <br />
                             Algumas habilidades afetam diretamente o desempenho em combate, enquanto outras têm efeitos mais sutis.
                             <br />
-                            Um Pokémon geralmente pode ter uma de duas ou três habilidades possíveis, sendo que algumas delas são "Habilidades Ocultas", disponíveis apenas em situações especiais.
+                            Um Pokémon geralmente pode ter uma de duas ou três habilidades possíveis, sendo que algumas delas säo "Habilidades Ocultas", disponíveis apenas em situaçöes especiais.
                             <br />
-                            Isso adiciona um nível extra de personalização, permitindo aos treinadores adaptarem suas estratégias com base nas habilidades.
+                            Isso adiciona um nível extra de personalizaçäo, permitindo aos treinadores adaptarem suas estratégias com base nas habilidades.
                         </p>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ function Info() {
                 <div className="flex flex-col md:flex-row items-center">
                     <div className="w-full p-4">
                         <p className="text-2xl text-white text-center">
-                            Os movimentos, ou moves, são as ações que os Pokémon utilizam em batalhas.
+                            Os movimentos, ou moves, säo as açöes que os Pokémon utilizam em batalhas.
                             <br />
                             Cada Pokémon pode carregar até quatro movimentos por vez, o que exige estratégia ao escolher quais usar.
                             <br />
@@ -121,7 +121,7 @@ function Info() {
                             <br />
                             Especiais: Baseiam-se no ataque especial do usuário (ex.: Thunderbolt).
                             <br />
-                            De Status: Alteram atributos ou causam condições, como paralisia ou sono (ex.: Swords Dance).
+                            De Status: Alteram atributos ou causam condiçöes, como paralisia ou sono (ex.: Swords Dance).
                         </p>
                     </div>
                 </div>
@@ -138,14 +138,14 @@ function Info() {
                             Evoluir é uma parte importante do crescimento de um Pokémon, aumentando seus atributos e, às vezes, mudando tipos ou habilidades.
                             <br />
                             <br />
-                            Existem diversas formas de evolução, como:
+                            Existem diversas formas de evoluçäo, como:
                             <br />
                             <br />
                             Por Nível: O método mais comum, alcançado ao ganhar experiência.
                             <br />
-                            Por Itens: Pedras especiais, como a Thunder Stone, ajudam em certas evoluções.
+                            Por Itens: Pedras especiais, como a Thunder Stone, ajudam em certas evoluçöes.
                             <br />
-                            Por Amizade ou Condições Específicas: Alguns Pokémon evoluem ao atingir laços fortes com o treinador ou em situações únicas.
+                            Por Amizade ou Condiçöes Específicas: Alguns Pokémon evoluem ao atingir laços fortes com o treinador ou em situaçöes únicas.
                             <br />
                             Por Troca: Certos Pokémon evoluem ao serem trocados entre treinadores.
                             <br />
@@ -170,7 +170,7 @@ function Info() {
                         <p className="text-2xl text-white text-center">
                             O universo Pokémon é repleto de complexidade e possibilidades, tornando cada jornada única.
                             <br />
-                            Desde capturar e treinar, até escolher os melhores movimentos e estratégias, o mundo Pokémon oferece infinitas oportunidades de exploração e diversão.
+                            Desde capturar e treinar, até escolher os melhores movimentos e estratégias, o mundo Pokémon oferece infinitas oportunidades de exploraçäo e diversäo.
                             <br />
                             Sejas tu um treinador iniciante ou veterano, há sempre algo novo para aprender ou experimentar.
                         </p>
