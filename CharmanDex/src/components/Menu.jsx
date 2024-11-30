@@ -24,7 +24,7 @@ const Menu = () => {
             (t.name === 'Pokedex' && /^\/pokedex\/\d+$/.test(currentPath))
         );
         setActiveTab(tab ? tab.name : 'Home');
-    }, [location]);
+    }, [location, tabs]);
 
     useEffect(() => {
         const activeButton = buttonRefs.current[activeTab] || buttonRefs.current.Home;
