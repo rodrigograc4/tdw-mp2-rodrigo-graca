@@ -1,0 +1,44 @@
+name: Build and Deploy React App
+
+on:
+  push:
+    branches:
+      - main  # Executa a pipeline em todos os commits em todas as branches
+  schedule:
+    - cron: "0 0 * * 1-5"  # Executa às 00:00 de segunda a sexta-feira
+  workflow_dispatch:  # Permite que a pipeline seja acionada manualmente
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Configurar o Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3. Instalar dependências
+      - name: Install dependencies
+        run: |
+          cd Charmandex
+          npm install
+
+      # 4. Build do projeto
+      - name: Build the project
+        run: |
+          cd Charmandex
+          npm run build
+
+      # 5. Deploy no Netlify
+      - name: Deploy to Netlify
+        run: |
+          npx netlify-cli deploy --dir=Charmandex/build --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod
+
+
+        
