@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Button({ onClick, imageSrc, label }) {
     return (
@@ -19,5 +20,11 @@ function Button({ onClick, imageSrc, label }) {
         </div>
     );
 }
+
+Button.propTypes = {
+    onClick: PropTypes.func.isRequired,
+    imageSrc: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+};
 
 export default Button;
