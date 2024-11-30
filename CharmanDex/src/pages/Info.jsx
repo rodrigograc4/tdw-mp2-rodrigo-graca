@@ -5,7 +5,7 @@ function Info() {
         <div className="min-h-screen flex flex-col items-center justify-center mt-[9rem] relative">
             <div className='w-full md:w-2/3 p-10 rounded-lg bg-[#383040] mb-20'>
                 {/* Título */}
-                <span className="flex items-center justify-center text-white text-8xl font-bold">
+                <span className="flex items-center justify-center text-white text-8xl">
                     Pokemon for Dummies
                 </span>
 
