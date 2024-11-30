@@ -21,7 +21,7 @@ function Info() {
                         </p>
                     </div>
                     <div className="w-full md:w-1/2 py-4 flex justify-center">
-                        <img src='InfoPage/pokemons.png' />
+                        <img src='InfoPage/pokemons.png' alt="pokemons" />
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@ function Info() {
                         </p>
                     </div>
                     <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/types.png' className='p-4' />
+                        <img src='InfoPage/types.png' alt="types" className='p-4' />
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@ function Info() {
                 {/* Quinta linha */}
                 <div className="flex flex-col md:flex-row items-center mt-10">
                     <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/abilities.png' className='p-4' />
+                        <img src='InfoPage/abilities.png' alt="abilities" className='p-4' />
                     </div>
                     <div className="w-full md:w-1/2 p-4">
                         <p className="text-2xl text-white text-center">
@@ -155,7 +155,7 @@ function Info() {
                         </p>
                     </div>
                     <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/evolution.png' className='p-4' />
+                        <img src='InfoPage/evolution.png' alt="evolutions" className='p-4' />
                     </div>
                 </div>
 
