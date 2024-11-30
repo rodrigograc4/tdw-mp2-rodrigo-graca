@@ -4,6 +4,7 @@ import { useAddPokemonDocumentMutation } from '../redux/pokemonFirestore';
 import Pokeball from '../components/CatchElements/Pokeball';
 import PokemonDisplay from '../components/CatchElements/PokemonDisplay';
 import Message from '../components/CatchElements/Message';
+import { useNavigate } from 'react-router-dom';
 
 function Catch() {
     const [pokemonId] = useState(Math.floor(Math.random() * 149) + 1); // Pokémon aleatório entre 1 e 149
@@ -20,6 +21,8 @@ function Catch() {
         left: '40%',
         transform: 'translate(-50%, 0)',
     });
+
+    const navigate = useNavigate(); // Use navigate hook
 
     const handlePokeballClick = async () => {
         if (attemptingCapture) return; // Evita múltiplos cliques
@@ -103,7 +106,7 @@ function Catch() {
     }
 
     if (redirect) {
-        window.location.href = `/pokedex/${pokemon.id}`;
+        navigate(`/pokedex/${pokemon.id}`); // Use navigate here
         return null;
     }
 
