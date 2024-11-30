@@ -5,45 +5,40 @@ const Menu = () => {
     const [activeTab, setActiveTab] = useState('');
     const [indicatorStyle, setIndicatorStyle] = useState({});
     const [borderStyle, setBorderStyle] = useState({});
-    const homeRef = useRef(null);
-    const pokedexRef = useRef(null);
-    const catchRef = useRef(null);
-    const infoRef = useRef(null);
 
+    const buttonRefs = useRef({});
     const navigate = useNavigate();
     const location = useLocation();
 
+    const tabs = [
+        { name: 'Home', path: '/', ref: 'homeRef' },
+        { name: 'Pokedex', path: '/pokedex', ref: 'pokedexRef' },
+        { name: 'Catch', path: '/catch', ref: 'catchRef' },
+        { name: 'Info', path: '/info', ref: 'infoRef' }
+    ];
+
     useEffect(() => {
         const currentPath = location.pathname;
-        if (currentPath === '/') {
-            setActiveTab('Home');
-        } else if (currentPath === '/pokedex' || /^\/pokedex\/\d+$/.test(currentPath)) {
-            setActiveTab('Pokedex');
-        } else if (currentPath === '/catch') {
-            setActiveTab('Catch');
-        } else if (currentPath === '/info') {
-            setActiveTab('Info');
-        }
+        const tab = tabs.find(t =>
+            currentPath === t.path ||
+            (t.name === 'Pokedex' && /^\/pokedex\/\d+$/.test(currentPath))
+        );
+        setActiveTab(tab ? tab.name : 'Home');
     }, [location]);
 
     useEffect(() => {
-        const activeButton =
-            activeTab === 'Home' ? homeRef.current :
-                activeTab === 'Pokedex' ? pokedexRef.current :
-                    activeTab === 'Catch' ? catchRef.current :
-                        activeTab === 'Info' ? infoRef.current :
-                            homeRef.current;
+        const activeButton = buttonRefs.current[activeTab] || buttonRefs.current.Home;
 
         if (activeButton) {
             const timeout = setTimeout(() => {
                 setIndicatorStyle({
                     width: `${activeButton.offsetWidth}px`,
-                    transform: `translateX(${activeButton.offsetLeft}px)`,
+                    transform: `translateX(${activeButton.offsetLeft}px)`
                 });
 
                 setBorderStyle({
                     width: `${activeButton.offsetWidth / 2}px`,
-                    transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`,
+                    transform: `translateX(${activeButton.offsetLeft + activeButton.offsetWidth / 4}px)`
                 });
             }, 100);
 
@@ -75,34 +70,16 @@ const Menu = () => {
                     }}
                 ></div>
 
-                <button
-                    ref={homeRef}
-                    onClick={() => handleNavigation('Home', '/')}
-                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
-                >
-                    Home
-                </button>
-                <button
-                    ref={pokedexRef}
-                    onClick={() => handleNavigation('Pokedex', '/pokedex')}
-                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
-                >
-                    Pokedex
-                </button>
-                <button
-                    ref={catchRef}
-                    onClick={() => handleNavigation('Catch', '/catch')}
-                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
-                >
-                    Catch
-                </button>
-                <button
-                    ref={infoRef}
-                    onClick={() => handleNavigation('Info', '/info')}
-                    className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
-                >
-                    Info
-                </button>
+                {tabs.map(({ name, path }) => (
+                    <button
+                        key={name}
+                        ref={link => buttonRefs.current[name] = link}
+                        onClick={() => handleNavigation(name, path)}
+                        className={`relative px-6 py-1.5 focus:outline-none z-10 rounded-full text-white text-3xl`}
+                    >
+                        {name}
+                    </button>
+                ))}
             </div>
         </div>
     );
