@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const StatsAndAbilities = ({ pokemon }) => {
 
@@ -43,7 +44,37 @@ const StatsAndAbilities = ({ pokemon }) => {
             </div>
         </div>
     );
-
 }
+
+StatsAndAbilities.propTypes = {
+    pokemon: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        types: PropTypes.arrayOf(PropTypes.string).isRequired,
+        abilities: PropTypes.arrayOf(PropTypes.string).isRequired,
+        stats: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                value: PropTypes.number.isRequired,
+            })
+        ).isRequired,
+        height: PropTypes.number.isRequired,
+        weight: PropTypes.number.isRequired,
+        sprites: PropTypes.shape({
+            default: PropTypes.string.isRequired,
+            frontGif: PropTypes.string.isRequired,
+            backGif: PropTypes.string.isRequired,
+            shinyFront: PropTypes.string.isRequired,
+            shinyBack: PropTypes.string.isRequired,
+        }).isRequired,
+        moves: PropTypes.arrayOf(
+            PropTypes.shape({
+                name: PropTypes.string.isRequired,
+                url: PropTypes.string.isRequired,
+            })
+        ).isRequired,
+    }).isRequired,
+};
+
 
 export default StatsAndAbilities;

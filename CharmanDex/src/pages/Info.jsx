@@ -1,181 +1,152 @@
 import React from 'react';
 
+const Section = ({ title, children }) => (
+    <div className="mt-20">
+        <span className="flex items-center justify-center text-white text-4xl">{title}</span>
+        <div className="flex flex-col md:flex-row items-center">{children}</div>
+    </div>
+);
+
+const TextBlock = ({ children }) => (
+    <div className="w-full md:w-1/2 p-4">
+        <p className="text-2xl text-white text-center">{children}</p>
+    </div>
+);
+
+const FullText = ({ children }) => (
+    <div className="w-full p-4">
+        <p className="text-2xl text-white text-center">{children}</p>
+    </div>
+);
+
+const ImageBlock = ({ src, alt }) => (
+    <div className="w-full md:w-1/2 p-4 flex justify-center">
+        <img src={src} alt={alt} className="p-4" />
+    </div>
+);
+
 function Info() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center mt-[9rem] relative">
-            <div className='w-full md:w-2/3 p-10 rounded-lg bg-[#383040] mb-20'>
+            <div className='w-full md:w-2/3 p-10 rounded-lg border-2 border-black bg-[#43719e] mb-20'>
                 {/* Título */}
-                <span className="flex items-center justify-center text-white text-8xl">
+                <div className="flex items-center justify-center text-white text-8xl">
                     Pokemon for Dummies
-                </span>
-
-                {/* Primeira linha */}
-                <div className="flex flex-col md:flex-row items-center mt-10">
-                    <div className="w-full md:w-1/2 py-4">
-                        <p className="text-2xl text-white text-center">
-                            O mundo Pokémon é fascinante, repleto de criaturas incríveis que coexistem com os humanos.
-                            <br />
-                            Cada Pokémon é único, com características que o diferenciam, como tipos, habilidades, movimentos e até mesmo formas evolutivas.
-                            <br />
-                            Esses elementos näo apenas tornam cada Pokémon especial, mas também säo essenciais para estratégias de batalha e o desenvolvimento de laços com os treinadores.
-                        </p>
-                    </div>
-                    <div className="w-full md:w-1/2 py-4 flex justify-center">
-                        <img src='InfoPage/pokemons.png' alt="pokemons" />
-                    </div>
                 </div>
 
-                {/* Sub Título */}
-                <span className="flex items-center justify-center text-white text-4xl mt-20">
-                    Tipos Pokémon
-                </span>
+                {/* Primeira Linha */}
+                <Section title="O Mundo Pokémon">
+                    <TextBlock>
+                        O mundo Pokémon é fascinante, repleto de criaturas incríveis que coexistem com os humanos.
+                        <br />
+                        Cada Pokémon é único, com características que o diferenciam, como tipos, habilidades, movimentos e até mesmo formas evolutivas.
+                        <br />
+                        Esses elementos näo apenas tornam cada Pokémon especial, mas também säo essenciais para estratégias de batalha e o desenvolvimento de laços com os treinadores.
+                    </TextBlock>
+                    <ImageBlock src='InfoPage/pokemons.png' alt="pokemons" />
+                </Section>
 
-                {/* Segunda linha */}
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full p-4">
-                        <p className="text-2xl text-white text-center">
-                            Os tipos säo um dos aspectos mais importantes de um Pokémon.
-                            <br />
-                            Cada Pokémon tem pelo menos um tipo, mas alguns podem ter dois, o que afeta diretamente suas forças e fraquezas em batalhas.
-                            <br />
-                            No total, existem 18 tipos diferentes, como Fogo, Água, Elétrico, Planta, Dragäo, Fantasma, Fada e muitos outros.
-                            <br />
-                            Esses tipos criam um sistema de vantagens e desvantagens, parecido com o jogo "pedra, papel e tesoura".
-                        </p>
-                    </div>
-                </div>
+                {/* Tipos Pokémon */}
+                <Section title="Tipos Pokémon">
+                    <FullText>
+                        Os tipos säo um dos aspectos mais importantes de um Pokémon.
+                        <br />
+                        Cada Pokémon tem pelo menos um tipo, mas alguns podem ter dois, o que afeta diretamente suas forças e fraquezas em batalhas.
+                        <br />
+                        No total, existem 18 tipos diferentes, como Fogo, Água, Elétrico, Planta, Dragäo, Fantasma, Fada e muitos outros.
+                        <br />
+                        Esses tipos criam um sistema de vantagens e desvantagens, parecido com o jogo "pedra, papel e tesoura".
+                    </FullText>
+                </Section>
 
-                {/* Terceira linha */}
-                <div className="flex flex-col md:flex-row items-center mt-10">
-                    <div className="w-full md:w-1/2 p-4">
-                        <p className="text-2xl text-white text-center">
-                            Por exemplo:
-                            <br />
+                {/* Exemplos de Tipos Pokémon */}
+                <Section title="Exemplos de Tipos Pokémon">
+                    <TextBlock>
+                        Por exemplo:
+                        <br />
+                        Água é forte contra Fogo, mas fraco contra Elétrico e Planta.
+                        <br />
+                        Dragäo é super eficaz contra si mesmo, mas fraco contra o tipo Fada.
+                        <br />
+                        Fantasma é imune a ataques do tipo Normal.
+                        <br />
+                        Esse sistema incentiva os treinadores a montarem equipes equilibradas, capazes de enfrentar diferentes tipos de adversários.
+                    </TextBlock>
+                    <ImageBlock src='InfoPage/types.png' alt="types" />
+                </Section>
 
-                            Água é forte contra Fogo, mas fraco contra Elétrico e Planta.
-                            <br />
-                            Dragäo é super eficaz contra si mesmo, mas fraco contra o tipo Fada.
-                            <br />
-                            Fantasma é imune a ataques do tipo Normal.
-                            <br />
-                            Esse sistema incentiva os treinadores a montarem equipes equilibradas, capazes de enfrentar diferentes tipos de adversários.
-                        </p>
-                    </div>
-                    <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/types.png' alt="types" className='p-4' />
-                    </div>
-                </div>
+                {/* Habilidades dos Pokémons */}
+                <Section title="Habilidades dos Pokémons">
+                    <FullText>
+                        Cada Pokémon possui uma habilidade única, que oferece vantagens tanto dentro quanto fora das batalhas.
+                        <br />
+                        Algumas habilidades afetam diretamente o desempenho em combate, enquanto outras têm efeitos mais sutis.
+                        <br />
+                        Um Pokémon geralmente pode ter uma de duas ou três habilidades possíveis, sendo que algumas delas säo "Habilidades Ocultas", disponíveis apenas em situaçöes especiais.
+                        <br />
+                        Isso adiciona um nível extra de personalizaçäo, permitindo aos treinadores adaptarem suas estratégias com base nas habilidades.
+                    </FullText>
+                </Section>
 
-                {/* Sub Título */}
-                <span className="flex items-center justify-center text-white text-4xl mt-20">
-                    Habilidades dos Pokémons
-                </span>
+                {/* Exemplos de Habilidades */}
+                <Section title="Exemplos de Habilidades">
+                    <ImageBlock src='InfoPage/abilities.png' alt="abilities" />
+                    <TextBlock>
+                        Por exemplo:
+                        <br />
+                        Levitate torna o Pokémon imune a ataques do tipo Terra.
+                        <br />
+                        Poison Heal cura o Pokémon ao invés de causar dano quando está envenenado.
+                    </TextBlock>
+                </Section>
 
-                {/* Quarta linha */}
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full p-4">
-                        <p className="text-2xl text-white text-center">
-                            Cada Pokémon possui uma habilidade única, que oferece vantagens tanto dentro quanto fora das batalhas.
-                            <br />
-                            Algumas habilidades afetam diretamente o desempenho em combate, enquanto outras têm efeitos mais sutis.
-                            <br />
-                            Um Pokémon geralmente pode ter uma de duas ou três habilidades possíveis, sendo que algumas delas säo "Habilidades Ocultas", disponíveis apenas em situaçöes especiais.
-                            <br />
-                            Isso adiciona um nível extra de personalizaçäo, permitindo aos treinadores adaptarem suas estratégias com base nas habilidades.
-                        </p>
-                    </div>
-                </div>
+                {/* Moves */}
+                <Section title="Moves">
+                    <FullText>
+                        Os movimentos, ou moves, säo as açöes que os Pokémon utilizam em batalhas.
+                        <br />
+                        Cada Pokémon pode carregar até quatro movimentos por vez, o que exige estratégia ao escolher quais usar.
+                        <br />
+                        Existem três tipos principais:
+                        <br />
+                        Físicos: Dependem do ataque físico do usuário (ex.: Earthquake).
+                        <br />
+                        Especiais: Baseiam-se no ataque especial do usuário (ex.: Thunderbolt).
+                        <br />
+                        De Status: Alteram atributos ou causam condiçöes, como paralisia ou sono (ex.: Swords Dance).
+                    </FullText>
+                </Section>
 
-                {/* Quinta linha */}
-                <div className="flex flex-col md:flex-row items-center mt-10">
-                    <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/abilities.png' alt="abilities" className='p-4' />
-                    </div>
-                    <div className="w-full md:w-1/2 p-4">
-                        <p className="text-2xl text-white text-center">
-                            Por exemplo:
-                            <br />
-                            Levitate torna o Pokémon imune a ataques do tipo Terra.
-                            <br />
-                            Poison Heal cura o Pokémon ao invés de causar dano quando está envenenado.
-                        </p>
-                    </div>
-                </div>
+                {/* Evoluçöes */}
+                <Section title="Evoluçöes">
+                    <TextBlock>
+                        Evoluir é uma parte importante do crescimento de um Pokémon, aumentando seus atributos e, às vezes, mudando tipos ou habilidades.
+                        <br />
+                        Existem diversas formas de evoluçäo, como:
+                        <br />
+                        Por Nível: O método mais comum, alcançado ao ganhar experiência.
+                        <br />
+                        Por Itens: Pedras especiais, como a Thunder Stone, ajudam em certas evoluçöes.
+                        <br />
+                        Por Amizade ou Condiçöes Específicas: Alguns Pokémon evoluem ao atingir laços fortes com o treinador ou em situaçöes únicas.
+                        <br />
+                        Por Troca: Certos Pokémon evoluem ao serem trocados entre treinadores.
+                        <br />
+                        Evoluir um Pokémon é estratégico, pois pode afetar os movimentos aprendidos e o estilo de batalha.
+                    </TextBlock>
+                    <ImageBlock src='InfoPage/evolution.png' alt="evolutions" />
+                </Section>
 
-                {/* Sub Título */}
-                <span className="flex items-center justify-center text-white text-4xl mt-20">
-                    Moves
-                </span>
-
-                {/* Sexta linha */}
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full p-4">
-                        <p className="text-2xl text-white text-center">
-                            Os movimentos, ou moves, säo as açöes que os Pokémon utilizam em batalhas.
-                            <br />
-                            Cada Pokémon pode carregar até quatro movimentos por vez, o que exige estratégia ao escolher quais usar.
-                            <br />
-                            Existem três tipos principais:
-                            <br />
-                            Físicos: Dependem do ataque físico do usuário (ex.: Earthquake).
-                            <br />
-                            Especiais: Baseiam-se no ataque especial do usuário (ex.: Thunderbolt).
-                            <br />
-                            De Status: Alteram atributos ou causam condiçöes, como paralisia ou sono (ex.: Swords Dance).
-                        </p>
-                    </div>
-                </div>
-
-                {/* Sub Título */}
-                <span className="flex items-center justify-center text-white text-4xl mt-20">
-                    Evoluçöes
-                </span>
-
-                {/* Sétima linha */}
-                <div className="flex flex-col md:flex-row items-center mt-10">
-                    <div className="w-full md:w-1/2 p-4">
-                        <p className="text-2xl text-white">
-                            Evoluir é uma parte importante do crescimento de um Pokémon, aumentando seus atributos e, às vezes, mudando tipos ou habilidades.
-                            <br />
-                            <br />
-                            Existem diversas formas de evoluçäo, como:
-                            <br />
-                            <br />
-                            Por Nível: O método mais comum, alcançado ao ganhar experiência.
-                            <br />
-                            Por Itens: Pedras especiais, como a Thunder Stone, ajudam em certas evoluçöes.
-                            <br />
-                            Por Amizade ou Condiçöes Específicas: Alguns Pokémon evoluem ao atingir laços fortes com o treinador ou em situaçöes únicas.
-                            <br />
-                            Por Troca: Certos Pokémon evoluem ao serem trocados entre treinadores.
-                            <br />
-                            <br />
-                            Evoluir um Pokémon é estratégico, pois pode afetar os movimentos aprendidos e o estilo de batalha.
-
-                        </p>
-                    </div>
-                    <div className="w-full md:w-1/2 p-4 flex justify-center">
-                        <img src='InfoPage/evolution.png' alt="evolutions" className='p-4' />
-                    </div>
-                </div>
-
-                {/* Sub Título */}
-                <span className="flex items-center justify-center text-white text-4xl mt-20">
-                    Conclusäo
-                </span>
-
-                {/* Oitava linha */}
-                <div className="flex flex-col md:flex-row items-center">
-                    <div className="w-full p-4">
-                        <p className="text-2xl text-white text-center">
-                            O universo Pokémon é repleto de complexidade e possibilidades, tornando cada jornada única.
-                            <br />
-                            Desde capturar e treinar, até escolher os melhores movimentos e estratégias, o mundo Pokémon oferece infinitas oportunidades de exploraçäo e diversäo.
-                            <br />
-                            Sejas tu um treinador iniciante ou veterano, há sempre algo novo para aprender ou experimentar.
-                        </p>
-                    </div>
-                </div>
+                {/* Conclusäo */}
+                <Section title="Conclusäo">
+                    <FullText>
+                        O universo Pokémon é repleto de complexidade e possibilidades, tornando cada jornada única.
+                        <br />
+                        Desde capturar e treinar, até escolher os melhores movimentos e estratégias, o mundo Pokémon oferece infinitas oportunidades de exploraçäo e diversäo.
+                        <br />
+                        Seja você um treinador iniciante ou veterano, há sempre algo novo para aprender ou experimentar.
+                    </FullText>
+                </Section>
             </div>
         </div>
     );
