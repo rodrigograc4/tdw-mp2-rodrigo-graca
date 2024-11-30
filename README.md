@@ -35,7 +35,7 @@ https://pokeapi.co/api/v2/move/87
 ## 🚀 Deployment:
 Este jogo pode ser encontrado deployed no Github Pages através do link abaixo:
 
-https://rodrigograc4.github.io/TDW/Mini_Projeto/
+https://charmandex.netlify.app/
 
 ## 📝 Autor:
 
