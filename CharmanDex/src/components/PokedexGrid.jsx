@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PokemonCard from './PokemonCard';
 import SkeletonCard from './Skeletons/SkeletonCard';
+import { useGetPokemonDocumentsQuery } from '../redux/pokemonFirestore';
 
 const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType }) => {
     const [loadedImages, setLoadedImages] = useState({});
+
+    useGetPokemonDocumentsQuery();
     const caught = useSelector((state) => state.caught);
 
     const handleImageLoad = (id) => {

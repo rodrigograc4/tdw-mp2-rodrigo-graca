@@ -4,7 +4,7 @@ import { useGetPokemonDocumentsQuery } from '../../redux/pokemonFirestore';
 
 const ImageAndName = ({ pokemon }) => {
 
-    const getDocs = useGetPokemonDocumentsQuery();
+    useGetPokemonDocumentsQuery();
     const caught = useSelector((state) => state.caught);
     const isCaught = pokemon && caught.includes(pokemon.name?.toLowerCase());
 

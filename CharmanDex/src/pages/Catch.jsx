@@ -28,7 +28,7 @@ function Catch() {
         // Definições da trajetória de arco
         const steps = 50;
         const startBottom = 5;
-        const endBottom = 70;
+        // const endBottom = 70;
         const peakHeight = 80;
         const startLeft = 40;
         const endLeft = 82;
