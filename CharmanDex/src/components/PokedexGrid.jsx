@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import PokemonCard from './PokemonCard';
 import SkeletonCard from './Skeletons/SkeletonCard';
 import { useGetPokemonDocumentsQuery } from '../redux/pokemonFirestore';
+import PropTypes from 'prop-types';
 
 const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType }) => {
     const [loadedImages, setLoadedImages] = useState({});
@@ -42,6 +43,13 @@ const PokedexGrid = ({ pokemons, isLoading, searchTerm, selectedType }) => {
             </div>
         </div>
     );
+};
+
+PokedexGrid.propTypes = {
+    pokemons: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    searchTerm: PropTypes.string.isRequired,
+    selectedType: PropTypes.string.isRequired,
 };
 
 export default PokedexGrid;

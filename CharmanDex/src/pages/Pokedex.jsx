@@ -3,7 +3,7 @@ import { useGetPokemonsQuery } from '../redux/pokeApi';
 import PokedexGrid from '../components/PokedexGrid';
 
 function Pokedex() {
-    const { data: pokemons = [], isLoading } = useGetPokemonsQuery();
+    const { data: pokemons = [], isLoading, error } = useGetPokemonsQuery();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedType, setSelectedType] = useState('');
 
@@ -19,17 +19,19 @@ function Pokedex() {
         ...new Set(pokemons.flatMap((pokemon) => pokemon.types)),
     ].sort();
 
+    if (error) {
+        return <div>Error loading Pokémon data!</div>;
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="relative w-2/3 h-[80vh] bg-red-600 rounded-lg border-2 border-black flex flex-col mt-[6rem]">
-
                 {/* Top Section */}
                 <div className="flex items-center justify-between px-8 py-4 border-b-2 border-black">
                     <img className="h-16 mr-4" src="../luzes.svg" alt="Botão azul" />
 
                     {/* Filtros */}
                     <div className='w-full space-x-4 flex justify-end'>
-
                         {/* Search */}
                         <input
                             type="text"

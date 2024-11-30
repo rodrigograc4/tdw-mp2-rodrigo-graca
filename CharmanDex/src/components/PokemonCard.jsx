@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const PokemonCard = ({ pokemon, isCaught, handleImageLoad, loadedImages }) => {
     const navigate = useNavigate();
@@ -35,6 +36,18 @@ const PokemonCard = ({ pokemon, isCaught, handleImageLoad, loadedImages }) => {
             <p className="mx-4 text-gray-400 text-3xl">{`#${pokemon.id}`}</p>
         </div>
     );
+};
+
+PokemonCard.propTypes = {
+    pokemon: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        types: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired,
+    isCaught: PropTypes.bool.isRequired,
+    handleImageLoad: PropTypes.func.isRequired,
+    loadedImages: PropTypes.objectOf(PropTypes.bool).isRequired,
 };
 
 export default PokemonCard;
