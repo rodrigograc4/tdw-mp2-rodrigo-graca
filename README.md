@@ -1,7 +1,7 @@
 # ⚡CharmanDex
 
 ## ℹ️ Sobre
-CharmanDex é um website Pokémon desenvolvido como parte do módulo M1B da disciplina de
+CharmanDex é um website Pokémon desenvolvido como parte do módulo de React Avançado da disciplina de
 Tecnologias de Desenvolvimento Web. O objetivo principal é a criação de uma aplicação de front-end
 em React, capaz de consumir e visualizar informações provenientes de uma fonte pública de dados,
 neste caso, a PokéAPI.
