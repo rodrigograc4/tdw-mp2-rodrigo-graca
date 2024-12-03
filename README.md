@@ -1,9 +1,17 @@
 # ⚡CharmanDex
 
 ## ℹ️ Sobre
-CharmanDex é um jogo de batalhas Pokémon desenvolvido como parte do módulo M1B da disciplina de Tecnologias de Desenvolvimento Web. Inicialmente, o objetivo é aplicar os conhecimentos de JavaScript, uso de APIs externas e estruturação de interfaces dinâmicas.
+CharmanDex é um website Pokémon desenvolvido como parte do módulo M1B da disciplina de
+Tecnologias de Desenvolvimento Web. O objetivo principal é a criação de uma aplicação de front-end
+em React, capaz de consumir e visualizar informações provenientes de uma fonte pública de dados,
+neste caso, a PokéAPI.
 
-Neste jogo, o jogador vai escolher o seu nome, pode escolher um Pokémon e também os seus ataques antes de entrar em combate contra outros Pokémons gerados aleatoriamente.
+
+## 🚀 Deployment:
+Este website pode ser encontrado deployed no Netlify através do link abaixo:
+
+https://charmandex.netlify.app/
+
 
 ## 🛠️ API's usadas
 
@@ -32,14 +40,7 @@ https://pokeapi.co/api/v2/pokemon/145
 https://pokeapi.co/api/v2/move/87
 ```
 
-## 🚀 Deployment:
-Este jogo pode ser encontrado deployed no Github Pages através do link abaixo:
-
-https://rodrigograc4.github.io/TDW/Mini_Projeto/
 
 ## 📝 Autor:
 
 Este projeto foi feito por mim, Rodrigo Graça.
-
-
-✨ Espero que te divirtas e vemo-nos da tabela de highscores! ✨
